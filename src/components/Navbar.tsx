@@ -15,11 +15,10 @@ export default function Navbar() {
 
   const menuItems = [
     { title: "Home", path: "/" },
-    { title: "Workout Plan", path: "/sell" },   
+    { title: "Workout Plan", path: "/workoutplan" },   
     { title: "Nutrition Plan", path: "/repair" },
     { title: "About Us", path: "/about" },
     { title: "Subscription", path: "/reviews" },
-    { title: "Contact", path: "/contact" },
   ];
 
   useEffect(() => {

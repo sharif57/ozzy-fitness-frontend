@@ -3,9 +3,9 @@ import React from "react";
 
 export default function AboutBanner() {
   return (
-    <div className="bg-[#F6F6F6]">
+    <div className="bg-[#F6F6F6] py-8">
       <div>
-        <div className="relative h-[20vh] md:h-[70vh] lg:h-[calc(100vh-100px)] xl:h-[calc(100vh-600px)] w-full flex items-center justify-center">
+        <div className="relative h-[20vh] md:h-[70vh] lg:h-[calc(80vh-100px)] xl:h-[calc(100vh-600px)] w-full flex items-center justify-center">
           {/* Background Image with Opacity */}
           <div
             className="absolute inset-0 bg-cover bg-top bg-no-repeat opacity-90"
@@ -23,10 +23,10 @@ export default function AboutBanner() {
           </div>
         </div>
       </div>
-      <section className="bg-white shadow-lg rounded-lg p-10 max-w-7xl mx-auto mt-20" >
+      <section className="bg-white shadow-lg rounded-lg lg:p-10  p-4 max-w-7xl mx-auto mt-20 mb-10" >
         {/* Title */}
         <div className="text-center">
-          <h1 className="text-[48px] font-semibold">About OEG</h1>
+          <h1 className="lg:text-[48px] text-4xl font-semibold">About OEG</h1>
           <p className="text-gray-500 text-[16px] font-normal mt-2">What is OEG Stretching Strength?</p>
         </div>
 
@@ -45,7 +45,7 @@ export default function AboutBanner() {
 
           {/* Right Text Content */}
           <div className="space-y-8">
-            <h2 className="text-[32px] font-medium">We believe in doing</h2>
+            <h2 className="lg:text-[32px] text-3xl font-medium">We believe in doing</h2>
             <p className="text-gray-600 text-[18px] font-normal mt-3">
             OEG FITNESS  is a balanced fitness program that combines gym, nutrition, stretching and therapy suited to fit an average person looking to start/or start over, as well as all levels of athletes. This includes younger athletes, pro athletes, former athletes, weekend warriors and master athletes.
             </p>
@@ -65,15 +65,15 @@ export default function AboutBanner() {
             {/* Stats Section */}
             <div className="flex gap-10 mt-6">
               <div>
-                <h3 className="text-2xl font-bold text-blue-600">100K+</h3>
-                <p className="text-gray-500 text-sm">
-                  Growth & improved progress
+                <h3 className="lg:text-[36px] text-2xl font-bold text-[#345C8C]">100K+ <span className="text-[12px] font-bold text-[#345C8C]">/Growth</span></h3>
+                <p className="text-gray-500 text-sm lg:w-3/5" >
+                Our mission’s to drive grow & improve progress.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-blue-600">30+ Years</h3>
-                <p className="text-gray-500 text-sm">
-                  Helping clients worldwide
+              <h3 className="lg:text-[36px] text-2xl font-bold text-[#345C8C]">30+ <span className="text-[12px] font-bold text-[#345C8C]">/Years</span></h3>
+              <p className="text-gray-500 text-sm lg:w-3/5">
+              Our mission’s to drive grow & improve progress.
                 </p>
               </div>
             </div>

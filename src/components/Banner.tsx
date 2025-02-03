@@ -27,11 +27,11 @@ const Banner = () => {
             <input
               type="text"
               placeholder="Enter your prompt.."
-              className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2"
+              className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2 py-6"
             />
 
             {/* Submit Button */}
-            <button className="bg-blue-800 text-white lg:px-8 px-4 lg:py-4 py-2 rounded-r-lg">
+            <button className="bg-blue-800 text-white lg:px-8 px-4 lg:py-6 py-2 rounded-r-lg">
               Enter
             </button>
           </div>
