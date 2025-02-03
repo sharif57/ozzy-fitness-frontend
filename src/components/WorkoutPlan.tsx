@@ -49,7 +49,10 @@ const WorkoutPlan: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-[40px]  font-semibold">Workout Plan</h2>
-        <Link  href="#" className="text-blue-600 text-[18px] hover:underline font-medium">
+        <Link
+          href="/workoutplan"
+          className="text-blue-600 text-[18px] hover:underline font-medium"
+        >
           See all
         </Link>
       </div>
@@ -91,16 +94,21 @@ const WorkoutPlan: React.FC = () => {
             <div className="p-4 space-y-2">
               <div className="flex justify-between items-center">
                 <h3 className="text-[24px] font-medium">{plan.title}</h3>
-                <span className="text-gray-600 text-[16px] font-normal">Time: {plan.time}</span>
+                <span className="text-gray-600 text-[16px] font-normal">
+                  Time: {plan.time}
+                </span>
               </div>
               <p className="text-gray-500 text-sm">{plan.description}</p>
             </div>
 
             {/* Buttons */}
             <div className="p-4 flex justify-between gap-4">
-              <button className="w-1/2 py-2 text-[18px] font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition">
-                See Details
-              </button>
+              <Link href={`/workoutplan/${plan.id}`} className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                {" "}
+                <button >
+                  See Details
+                </button>
+              </Link>
               <button className="w-1/2 py-2 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
                 Add to Plan
               </button>

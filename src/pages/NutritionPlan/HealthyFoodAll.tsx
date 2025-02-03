@@ -5,7 +5,8 @@
 //     <div>HealthyFood</div>
 //   )
 // }
-
+"use client";
+import { Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,11 +17,14 @@ type WorkoutPlans = {
   title: string;
   Nutrition: string;
   description: string;
-  image: string;
+  image: string;    
   rating: number;
 };
+const handleChange = (value: { value: string; label: React.ReactNode }) => {
+  console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+};
 
-const HealthyFood: React.FC = () => {
+const HealthyFoodAll: React.FC = () => {
   // Sample data
   const plans: WorkoutPlans[] = [
     {
@@ -50,6 +54,33 @@ const HealthyFood: React.FC = () => {
       image: "/images/food3.png",
       rating: 4.9,
     },
+    {
+      id: 4,
+      title: "High-Protein Meal Plans",
+      Nutrition: "Focuses on the unique dietary needs after bariatric surgery.",
+      description:
+        "Designed for those who need to increase their protein intake, our High-Protein Meal Plan supports muscle maintenance and growth while promoting weight loss.",
+      image: "/images/food3.png",
+      rating: 4.9,
+    },
+    {
+      id: 5,
+      title: "High-Protein Meal Plans",
+      Nutrition: "Focuses on the unique dietary needs after bariatric surgery.",
+      description:
+        "Designed for those who need to increase their protein intake, our High-Protein Meal Plan supports muscle maintenance and growth while promoting weight loss.",
+      image: "/images/food3.png",
+      rating: 4.9,
+    },
+    {
+      id: 6,
+      title: "High-Protein Meal Plans",
+      Nutrition: "Focuses on the unique dietary needs after bariatric surgery.",
+      description:
+        "Designed for those who need to increase their protein intake, our High-Protein Meal Plan supports muscle maintenance and growth while promoting weight loss.",
+      image: "/images/food3.png",
+      rating: 4.9,
+    },
   ];
 
   return (
@@ -57,12 +88,22 @@ const HealthyFood: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-[40px]  font-semibold">Healthy Food</h2>
-        <Link
-          href="/nutritionplan"
-          className="text-blue-600 text-[18px] hover:underline font-medium"
-        >
-          See all
-        </Link>
+        <Select
+          labelInValue
+          defaultValue={{ value: "Sort by", label: "Sort by" }}
+          style={{ width: 120 }}
+          onChange={handleChange}
+          options={[
+            {
+              value: "jack",
+              label: "Low to High",
+            },
+            {
+              value: "lucy",
+              label: "Low to High",
+            },
+          ]}
+        />
       </div>
 
       {/* Plans Grid */}
@@ -81,7 +122,6 @@ const HealthyFood: React.FC = () => {
                 alt={plan.title}
                 className="w-full object-cover"
               />
-             
             </div>
 
             {/* Content */}
@@ -116,18 +156,18 @@ const HealthyFood: React.FC = () => {
                 <span className="font-semibold text-gray-800">
                   Post-Surgery Nutrition:
                 </span>
-                <span className="text-gray-600">
-                  {" "}
-                 {plan.Nutrition}
-                </span>
+                <span className="text-gray-600"> {plan.Nutrition}</span>
               </div>
             </div>
 
             {/* Buttons */}
             <div className=" pt-4 flex justify-between gap-4">
-              <button className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
+              <Link
+                href={`/nutritionplan/${plan.id}`}
+                className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition text-center flex items-center justify-center"
+              >
                 Read More
-              </button>
+              </Link>
             </div>
           </div>
         ))}
@@ -136,4 +176,4 @@ const HealthyFood: React.FC = () => {
   );
 };
 
-export default HealthyFood;
+export default HealthyFoodAll;

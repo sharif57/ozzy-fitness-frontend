@@ -31,7 +31,7 @@ const Banner = () => {
             />
 
             {/* Submit Button */}
-            <button className="bg-blue-800 text-white lg:px-8 px-4 lg:py-6 py-2 rounded-r-lg">
+            <button className="bg-[#01336F] text-white lg:px-8 px-4 lg:py-6 py-2 rounded-r-lg">
               Enter
             </button>
           </div>

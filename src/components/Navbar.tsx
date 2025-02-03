@@ -16,7 +16,7 @@ export default function Navbar() {
   const menuItems = [
     { title: "Home", path: "/" },
     { title: "Workout Plan", path: "/workoutplan" },   
-    { title: "Nutrition Plan", path: "/repair" },
+    { title: "Nutrition Plan", path: "/nutritionplan" },
     { title: "About Us", path: "/about" },
     { title: "Subscription", path: "/reviews" },
   ];
