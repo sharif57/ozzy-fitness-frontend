@@ -1,6 +1,7 @@
 "use client";
 import Appointment from "@/components/Appointment";
 import WorkoutBanner from "@/pages/WorkoutPlan/WorkoutBanner";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface WorkoutDay {
@@ -144,11 +145,11 @@ export default function WorkoutPlanPage() {
           </div>
 
           {/* Add to Plan Button */}
-          <div className="flex justify-end mt-16">
+          <Link href={'/workoutplan/day'} className="flex justify-end mt-16">
             <button className="px-10 py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
               Add to Plan
             </button>
-          </div>
+          </Link>
 
           {/* Custom Scrollbar CSS */}
           <style jsx>{`
