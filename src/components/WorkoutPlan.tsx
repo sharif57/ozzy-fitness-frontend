@@ -49,7 +49,7 @@ const WorkoutPlan: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-[40px]  font-semibold">Workout Plan</h2>
-        <Link  href="#" className="text-blue-600 text-[18px] hover:underline text-sm">
+        <Link  href="#" className="text-blue-600 text-[18px] hover:underline font-medium">
           See all
         </Link>
       </div>
