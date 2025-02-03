@@ -36,11 +36,10 @@ const consultations = [
 const Appointment = () => {
   return (
     <div className="bg-gray-50 py-10 max-w-7xl mx-auto">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 w-1/2 mx-auto">
         <h1 className="text-[48px] font-semibold">Book an Appointment</h1>
-        <p className="text-gray-600 mt-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore.
+        <p className="text-gray-600 mt-2 ">
+        you have arranged to see them at a particular time, usually in connection with their work or for a serious purpose
         </p>
       </div>
       <div className="flex flex-col md:flex-row justify-center items-start gap-14">
