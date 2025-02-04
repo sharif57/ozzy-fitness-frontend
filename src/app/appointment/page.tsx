@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { Calendar, Form, Input, Button, Select, Radio, Modal, Typography, Card } from "antd";
-import { LeftOutlined, RightOutlined, FileTextOutlined } from "@ant-design/icons";
-import dayjs, { Dayjs } from "dayjs";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import  { Dayjs } from "dayjs";
 
 const { Option } = Select;
-const { Title, Text } = Typography;
+const {  Text } = Typography;
 
 interface AppointmentData {
   fullName: string;
