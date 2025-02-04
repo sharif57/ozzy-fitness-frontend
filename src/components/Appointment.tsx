@@ -1,5 +1,6 @@
 import { CircleCheck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type consultations = {
@@ -74,11 +75,11 @@ const Appointment = () => {
                 ))}
               </ul>
             </div>
-            <div className=" mt-8 flex justify-between gap-4">
+            <Link href={'/appointment'} className=" mt-8 flex justify-between gap-4">
               <button className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
                 Book Now
               </button>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

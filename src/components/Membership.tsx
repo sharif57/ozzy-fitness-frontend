@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 // Define Type for Membership Plans
@@ -95,9 +96,12 @@ const Membership: React.FC = () => {
             </ul>
 
             {/* Purchase Button */}
-            <button className="w-full bg-[#01336F] text-white rounded-lg py-3 mt-6 hover:bg-blue-800 transition">
-              Purchase Now
-            </button>
+
+            <Link href={`subscription/${plan.id}`}  className="w-full text-center bg-[#01336F] text-white rounded-lg py-3 mt-6 hover: transition">
+              <button>
+                Purchase Now
+              </button>
+            </Link>
           </div>
         ))}
       </div>

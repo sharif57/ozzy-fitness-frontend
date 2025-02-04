@@ -8,7 +8,7 @@ import type { CheckboxProps } from "antd";
 import Appointment from "@/components/Appointment";
 import NutritionPlanDetails from "@/pages/NutritionPlan/NutritionPlanDetails";
 import { IoMdShareAlt } from "react-icons/io";
-import { Button, Flex, Modal } from "antd";
+import { Flex, Modal } from "antd";
 
 interface WorkoutPlan {
   id: number;
@@ -54,7 +54,6 @@ const plans: WorkoutPlan[] = [
 ];
 
 const MealPlans: React.FC = () => {
-  const [open, setOpen] = useState(false);
   const [openResponsive, setOpenResponsive] = useState(false);
 
   return (
@@ -62,12 +61,12 @@ const MealPlans: React.FC = () => {
       <div>
         <NutritionPlanDetails></NutritionPlanDetails>
       </div>
-      <div className="container mx-auto p-6 bg-white s">
+      <div className="container mx-auto lg:p-6 p-2 bg-white ">
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-2/3">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-[40px] font-semibold mb-3">
+                <h1 className="lg:text-[40px] text-[20px] font-semibold mb-3">
                   Bariatric Meal Plan
                 </h1>
                 <p className="text-gray-500 text-[20px] font-normal mb-5 flex items-center gap-2">
@@ -161,7 +160,7 @@ const MealPlans: React.FC = () => {
 
             <div className="mt-6">
               <h2 className="text-[32px] font-medium mb-3">Ingredients</h2>
-              <ul className="grid grid-cols-2 gap-4 ">
+              <ul className="grid lg:grid-cols-2 grid-cols-1 gap-4 ">
                 {[
                   "1 chopped green zucchini, spinach, arugula",
                   "100g grilled chicken breast (or tofu)",
@@ -212,7 +211,7 @@ const MealPlans: React.FC = () => {
                 {plans.map((plan) => (
                   <div
                     key={plan.id}
-                    className="flex gap-3 items-center  p-3 rounded-lg shadow-sm"
+                    className="lg:flex gap-3 items-center  p-3 rounded-lg shadow-sm"
                   >
                     <Image
                       width={500}
@@ -245,7 +244,7 @@ const MealPlans: React.FC = () => {
                 {plans.map((plan) => (
                   <div
                     key={plan.id}
-                    className="flex gap-3 items-center  p-3 rounded-lg shadow-sm"
+                    className="lg:flex gap-3 items-center  p-3 rounded-lg shadow-sm"
                   >
                     <Image
                       width={500}
@@ -275,7 +274,7 @@ const MealPlans: React.FC = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="">
         <Appointment></Appointment>
       </div>
     </div>

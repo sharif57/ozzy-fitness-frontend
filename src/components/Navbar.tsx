@@ -18,7 +18,7 @@ export default function Navbar() {
     { title: "Workout Plan", path: "/workoutplan" },   
     { title: "Nutrition Plan", path: "/nutritionplan" },
     { title: "About Us", path: "/about" },
-    { title: "Subscription", path: "/reviews" },
+    { title: "Subscription", path: "/subscription" },
   ];
 
   useEffect(() => {
