@@ -52,10 +52,10 @@ const Membership: React.FC = () => {
   ];
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
+    <div className="px-4 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
       <div className="text-center mb-14">
-        <h2 className="text-[48px] font-semibold">Membership Plan</h2>
+        <h2 className="lg:text-[48px] text-[30px] font-semibold">Membership Plan</h2>
         <p className="text-gray-500 mt-2">
           Strong bodies start with smart choices. Empowering healthier, happier
           lives.
@@ -63,7 +63,7 @@ const Membership: React.FC = () => {
       </div>
 
       {/* Plans Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  max-w-6xl mx-auto">
         {plans.map((plan: MembershipPlanType) => (
           <div
             key={plan.id}
@@ -81,7 +81,7 @@ const Membership: React.FC = () => {
             </div>
 
             {/* Features List */}
-            <ul className="space-y-5">
+            <ul className="space-y-6">
               {plan.features.map((feature, index) => (
                 <li
                   key={index}

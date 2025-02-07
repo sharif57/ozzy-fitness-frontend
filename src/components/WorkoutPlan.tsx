@@ -47,7 +47,7 @@ const WorkoutPlan: React.FC = () => {
   return (
     <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
-      <div className="flex justify-between items-center mb-10">
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-[40px]  font-semibold">Workout Plan</h2>
         <Link
           href="/workoutplan"

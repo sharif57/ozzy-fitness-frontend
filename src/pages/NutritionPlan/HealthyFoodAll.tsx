@@ -84,10 +84,10 @@ const HealthyFoodAll: React.FC = () => {
   ];
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
+    <div className="px-2 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
-        <h2 className="text-[40px]  font-semibold">Healthy Food</h2>
+        <h2 className="lg:text-[40px] text-[22px]  font-semibold">Healthy Food</h2>
         <Select
           labelInValue
           defaultValue={{ value: "Sort by", label: "Sort by" }}

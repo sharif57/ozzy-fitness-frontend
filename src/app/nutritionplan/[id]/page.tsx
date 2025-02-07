@@ -217,10 +217,10 @@ const MealPlans: React.FC = () => {
                   "Mix the cooked chicken with the veggies and serve.",
                 ].map((step, index) => (
                   <li key={index} className="flex flex-col items-start gap-2 ">
-                    <span className="font-normal text-[20px] text-[#333333]">
+                    <span className="font-normal text-[20px] text-">
                       Step {index + 1}:
                     </span>
-                    <span className="text-[18px] font-normal">{step}</span>
+                    <span className="text-[18px] text-gray-600 font-normal">{step}</span>
                   </li>
                 ))}
               </ol>

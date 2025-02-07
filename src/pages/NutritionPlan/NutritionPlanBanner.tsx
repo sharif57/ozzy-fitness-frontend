@@ -18,7 +18,7 @@ export default function NutritionBanner() {
           {/* Content */}
           <div className="relative text-center space-y-5 z-10  ">
             <h1
-              className="text-white lg:text-[48px] text-[40px] w-4/5
+              className="text-white lg:text-[48px] text-[30px] w-4/5
  font-bold  mx-auto"
             >
               Create your Nutrition Plan
@@ -31,11 +31,11 @@ export default function NutritionBanner() {
               <input
                 type="text"
                 placeholder="Enter your prompt.."
-                className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2 py-6"
+                className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2 lg:py-6 py-4"
               />
 
               {/* Submit Button */}
-              <button className="bg-[#01336F] text-white lg:px-8 px-4 lg:py-6 py-2 rounded-r-lg">
+              <button className="bg-[#01336F] text-white lg:px-8 px-4 lg:py-6 py-4 rounded-r-lg">
                 Enter
               </button>
             </div>

@@ -1,17 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Calendar,
-  Form,
-  Input,
-  Button,
-  Select,
-  Modal,
-  Typography,
-} from "antd";
+import { Calendar, Form, Input, Button, Select, Modal, Typography } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Dayjs } from "dayjs";
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const { Option } = Select;
 const { Text } = Typography;
@@ -58,7 +51,7 @@ const AppointmentBooking: React.FC = () => {
       <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
       {/* Content Wrapper */}
-      <div className="relative  gap-6 p-6 w-full max-w-6xl z-10">
+      <div className="relative  gap-6 lg:p-6 w-full max-w-6xl z-10">
         <div>
           <div className="flex items-center gap-3">
             <div className="bg-white p-2 rounded-full">
@@ -119,7 +112,6 @@ const AppointmentBooking: React.FC = () => {
                           ? "bg-[#01336F80] text-white"
                           : " border-gray-300 text-gray-300"
                       }`}
-                      
                     >
                       <input
                         type="radio"
@@ -228,9 +220,14 @@ const AppointmentBooking: React.FC = () => {
               >
                 Book an Appointment
               </Button> */}
-              <button className="w-full py-3 bg-[#01336F] text-[18px] font-normal rounded-lg text-white">
-                Book an Appointment
-              </button>
+              <Link href={'/checkout'}>
+                <button
+                  disabled={!selectedDate || !selectedTime}
+                  className="w-full py-3 bg-[#01336F] text-[18px] font-normal rounded-lg text-white"
+                >
+                  Book an Appointment
+                </button>
+              </Link>
             </Form>
           </div>
         </div>
