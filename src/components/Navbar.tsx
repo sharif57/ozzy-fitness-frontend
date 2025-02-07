@@ -62,11 +62,14 @@ export default function Navbar() {
           ))}
         </ul>
 
+       
+        <Link href={'/auth'}>
         <div className="hidden lg:flex items-center gap-10 ml-10">
           <button className="bg-[#01336F] text-white px-8 py-4 rounded-lg text-[18px]">
             Sign Up
           </button>
         </div>
+        </Link>
       </div>
 
       <div

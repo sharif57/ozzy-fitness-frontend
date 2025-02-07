@@ -20,7 +20,7 @@ body {
 } 
 
 .card.ant-card-body{
-  background-color: #101010CC;
+  background-color: #101010CC !important  ;
 }
 
 .ant-picker-calendar .ant-picker-panel{
@@ -46,7 +46,6 @@ body {
 
 .ant-picker-calendar .ant-picker-cell .ant-picker-cell-inner{
   position: relative !important;
-  
   font-weight: 400;
   z-index: 2;
   display: inline-block;
@@ -57,3 +56,45 @@ body {
   border-radius: 50% !important;
   transition: background 0.2s !important;       
 }
+
+.ant-card-bordered{
+  border:none !important;
+
+}
+
+.ant-typography{
+  color: white !important;
+  font-weight: 700 !important ;
+  font-size:   30px !important;
+
+}
+
+.ant-card .ant-card-body {
+  background: none !important;;
+}
+
+.ant-picker-calendar-mini{
+border-radius: 36px !important;
+}
+
+.ant-btn-variant-outlined{
+  background: none !important;
+  border: none !important;
+}
+
+.ant-btn{
+font-size: 25px !important;
+color: white !important;
+}
+.ant-picker-calendar-mini .ant-picker-content th{
+  font-size: 24px !important;
+  color:white !important;
+  font-weight: 500 !important;
+  line-height: 59px !important;
+}
+
+.ant-input {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+

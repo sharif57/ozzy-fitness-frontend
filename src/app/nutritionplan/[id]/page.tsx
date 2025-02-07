@@ -80,34 +80,58 @@ const MealPlans: React.FC = () => {
                   4.9 (5k reviews)
                 </p>
               </div>
-              <div className="flex items-center gap-4">
-                <Flex vertical gap="middle" align="flex-start">
+                <div className="flex items-center gap-4">
+                  <Flex vertical gap="middle" align="flex-start">
                   <Modal
-                    title="Modal responsive width"
-                    centered
-                    open={openResponsive}
-                    onOk={() => setOpenResponsive(false)}
-                    onCancel={() => setOpenResponsive(false)}
-                    width={{
-                      xs: "90%",
-                      sm: "80%",
-                      md: "70%",
-                      lg: "60%",
-                      xl: "50%",
-                      xxl: "30%",
-                    }}
+                  title="Chat with Nutritionist"
+                  centered
+                  open={openResponsive}
+                  onOk={undefined}
+                  onCancel={() => setOpenResponsive(false)}
+                  width={{
+                  xs: "90%",
+                  sm: "80%",
+                  md: "70%",
+                  lg: "60%",
+                  xl: "50%",
+                  xxl: "30%",
+                  }}
+                  footer={null}
                   >
-                    <p>some contents...</p>
-                    <p>some contents...</p>
-                    <p>some contents...</p>
+                  {/* Chat Messages Container */}
+                  <div className="flex flex-col gap-4 h-[400px] overflow-y-auto">
+                  {/* Nutritionist Message */}
+                  <div className="flex gap-2">
+                    <div className="bg-blue-100 p-3 rounded-lg max-w-[80%]">
+                    <p>Hello! How can I help you with your nutrition plan today?</p>
+                    </div>
+                  </div>
+                  {/* User Message */}
+                  <div className="flex gap-2 justify-end">
+                    <div className="bg-gray-100 p-3 rounded-lg max-w-[80%]">
+                    <p>I have some questions about the Bariatric Meal Plan.</p>
+                    </div>
+                  </div>
+                  </div>
+                  {/* Chat Input Area */}
+                  <div className="mt-4 flex gap-2">
+                  <input 
+                    type="text" 
+                    placeholder="Type your message..."
+                    className="flex-1 p-2 border rounded-lg"
+                  />
+                  <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    Send
+                  </button>
+                  </div>
                   </Modal>
-                </Flex>
-                <Sparkles
+                  </Flex>
+                  <Sparkles
                   onClick={() => setOpenResponsive(true)}
-                  className="size-6 cursor-pointer"
-                />
-                <IoMdShareAlt className="size-6" />
-              </div>
+                  className="size-6 cursor-pointer hover:text-blue-500"
+                  />
+                  <IoMdShareAlt className="size-6 cursor-pointer hover:text-blue-500" />
+                </div>
             </div>
             <Image
               width={500}
@@ -238,39 +262,7 @@ const MealPlans: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className="border p-4 rounded-lg">
-              <h2 className="text-xl font-semibold mb-3">Related News </h2>
-              <div className="space-y-3">
-                {plans.map((plan) => (
-                  <div
-                    key={plan.id}
-                    className="lg:flex gap-3 items-center  p-3 rounded-lg shadow-sm"
-                  >
-                    <Image
-                      width={500}
-                      height={200}
-                      src={plan.image}
-                      alt={plan.title}
-                      className="w-24 h-16 rounded-md object-cover"
-                    />
-                    <div>
-                      <h3 className="text-md font-medium">{plan.title}</h3>
-                      <p className="text-sm text-gray-500">{plan.Nutrition}</p>
-                    </div>
-                    <span className="ml-auto text-[#545454] font-normal flex gap-2 items-center">
-                      <Star
-                        size={16}
-                        color="#FB953B"
-                        strokeWidth={2.75}
-                        absoluteStrokeWidth
-                        className=""
-                      />{" "}
-                      {plan.rating}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+        
           </div>
         </div>
       </div>
