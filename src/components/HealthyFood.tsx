@@ -28,7 +28,7 @@ const HealthyFood: React.FC = () => {
       title: "Bariatric Meal Plan",
       Nutrition: "Focuses on the unique dietary needs after bariatric surgery.",
       description:
-        "Our Bariatric Meal Plan is specially formulated for individuals who have undergone bariatric surgery. It ensures you get the necessary nutrients while maintaining a reduced calorie intake.",
+        "Our Bariatric Meal Plan is specially formulated for individuals who have undergone bariatric surgery. It ensures you get the necessary nutrients while maintaining a reduced calorie.",
       image: "/images/food.png",
       rating: 4.9,
     },
@@ -125,9 +125,15 @@ const HealthyFood: React.FC = () => {
 
             {/* Buttons */}
             <div className=" pt-4 flex justify-between gap-4">
-              <button className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
+              {/* <button className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
                 Read More
-              </button>
+              </button> */}
+              <Link
+                href={`/nutritionplan/${plan.id}`}
+                className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition text-center flex items-center justify-center"
+              >
+                Read More
+              </Link>
             </div>
           </div>
         ))}

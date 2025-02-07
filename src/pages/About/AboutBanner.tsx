@@ -23,7 +23,7 @@ export default function AboutBanner() {
           </div>
         </div>
       </div>
-      <section className="bg-white shadow-lg rounded-lg lg:p-10  p-4 max-w-7xl mx-auto mt-20 mb-10" >
+      <section className="bg-white shadow rounded-lg lg:p-10  p-4 max-w-7xl mx-auto mt-20 mb-10" >
         {/* Title */}
         <div className="text-center">
           <h1 className="lg:text-[48px] text-4xl font-semibold">About OEG</h1>
@@ -44,7 +44,7 @@ export default function AboutBanner() {
           ></Image>
 
           {/* Right Text Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 mt-12">
             <h2 className="lg:text-[32px] text-3xl font-medium">We believe in doing</h2>
             <p className="text-gray-600 text-[18px] font-normal mt-3">
             OEG FITNESS  is a balanced fitness program that combines gym, nutrition, stretching and therapy suited to fit an average person looking to start/or start over, as well as all levels of athletes. This includes younger athletes, pro athletes, former athletes, weekend warriors and master athletes.
