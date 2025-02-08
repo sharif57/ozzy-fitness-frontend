@@ -58,7 +58,7 @@ const HealthyFood: React.FC = () => {
       <div className="flex justify-between items-center mb-10">
         <h2 className="text-[40px]  font-semibold">Healthy Food</h2>
         <Link
-          href="/nutritionplan"
+          href="/nutritionplan1"
           className="text-blue-600 text-[18px] hover:underline font-medium"
         >
           See all
@@ -129,7 +129,7 @@ const HealthyFood: React.FC = () => {
                 Read More
               </button> */}
               <Link
-                href={`/nutritionplan/${plan.id}`}
+                href={`/nutritionplan1/${plan.id}`}
                 className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition text-center flex items-center justify-center"
               >
                 Read More

@@ -145,7 +145,7 @@ export default function WorkoutPlanPage() {
           </div>
 
           {/* Add to Plan Button */}
-          <Link href={'/workoutplan/day'} className="flex justify-end mt-16">
+          <Link href={'/workoutplan1/day'} className="flex justify-end mt-16">
             <button className="px-10 py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg  transition">
               Add to Plan
             </button>

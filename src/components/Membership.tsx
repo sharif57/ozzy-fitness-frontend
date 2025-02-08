@@ -97,7 +97,7 @@ const Membership: React.FC = () => {
 
             {/* Purchase Button */}
 
-            <Link href={`subscription/${plan.id}`}  className="w-full text-center bg-[#01336F] text-white rounded-lg py-3 mt-6 hover: transition">
+            <Link href={`subscription1/${plan.id}`}  className="w-full text-center bg-[#01336F] text-white rounded-lg py-3 mt-6 hover: transition">
               <button>
                 Purchase Now
               </button>

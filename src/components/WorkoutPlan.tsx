@@ -50,7 +50,7 @@ const WorkoutPlan: React.FC = () => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-[40px]  font-semibold">Workout Plan</h2>
         <Link
-          href="/workoutplan"
+          href="/workoutplan1"
           className="text-blue-600 text-[18px] hover:underline font-medium"
         >
           See all
@@ -103,7 +103,7 @@ const WorkoutPlan: React.FC = () => {
 
             {/* Buttons */}
             <div className="p-4 flex justify-between gap-4">
-              <Link href={`/workoutplan/${plan.id}`} className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition">
+              <Link href={`/workoutplan1/${plan.id}`} className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition">
                 {" "}
                 <button >
                   See Details

@@ -126,7 +126,7 @@ const SelectWorkoutPlan: React.FC = () => {
 
             {/* Buttons */}
             <div className="p-4 flex justify-between gap-4">
-              <Link   href={`/workoutplan/${plan.id}`} className="w-1/2 py-2 text-[18px] font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition text-center" >
+              <Link   href={`/workoutplan1/${plan.id}`} className="w-1/2 py-2 text-[18px] font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition text-center" >
                 {" "}
                 <button >
                   See Details

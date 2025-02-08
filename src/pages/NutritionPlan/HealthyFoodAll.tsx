@@ -163,7 +163,7 @@ const HealthyFoodAll: React.FC = () => {
             {/* Buttons */}
             <div className=" pt-4 flex justify-between gap-4">
               <Link
-                href={`/nutritionplan/${plan.id}`}
+                href={`/nutritionplan1/${plan.id}`}
                 className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition text-center flex items-center justify-center"
               >
                 Read More
