@@ -1,13 +1,13 @@
 'use client'
 import baseApi from "../api/baseApi";
 
-export const workApi = baseApi.injectEndpoints({
+export const nutritionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
 
-    allWorkPlan: builder.query({
+    allNutrition: builder.query({
       query: () => ({
-        url: "/workout-plan/all-workout-plan",
+        url: "/nutrition/all-nutrition",
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -16,9 +16,9 @@ export const workApi = baseApi.injectEndpoints({
       providesTags: ["Room"],
     }),
 
-    workPlanDetails: builder.query({
+    nutritionDetails: builder.query({
         query: (_id) => ({
-          url: `/workout-plan/workout-plan-details/${_id}`,
+          url: `/nutrition//nutriton-details/${_id}`,
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -31,4 +31,4 @@ export const workApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {  useAllWorkPlanQuery, useWorkPlanDetailsQuery} = workApi;
+export const {useAllNutritionQuery , useNutritionDetailsQuery} = nutritionApi;

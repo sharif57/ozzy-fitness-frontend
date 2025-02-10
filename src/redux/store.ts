@@ -27,7 +27,6 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import baseApi from "./api/baseApi";
-import { userApi } from "./features/userSlice";
 
 export const store = configureStore({
   reducer: {

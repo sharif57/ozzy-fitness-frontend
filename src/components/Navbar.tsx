@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Bell, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -11,19 +11,21 @@ import { Dropdown } from "antd";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
-interface userProfile {
+interface UserProfile {
   name: string;
   email: string;
   phone: string;
   role: string;
-  image: string;
+  image?: string;
 }
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { data: userProfile } = useUserProfileQuery<{ data: userProfile }>();
   const router = useRouter();
+  const { data: userData } = useUserProfileQuery<{ data: UserProfile }>();
+  const userProfile = userData?.data;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure .env.local has this variable
 
   const handleLogOut = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -41,8 +43,8 @@ export default function Navbar() {
     { key: "1", label: "My Account", disabled: true },
     { type: "divider" },
     { key: "2", label: <Link href="/profile">Profile</Link> },
-    { key: "3", label: <Link href="/settings">My Appointment</Link> },
-    { key: "4", label: <Link href="/settings">My Workout Plan</Link> },
+    { key: "3", label: <Link href="/appointments">My Appointment</Link> },
+    { key: "4", label: <Link href="/workoutplan1">My Workout Plan</Link> },
     { type: "divider" },
     { key: "5", label: <button onClick={handleLogOut}>Logout</button> },
   ];
@@ -65,10 +67,18 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // ✅ Ensure profile image URL is correct
+  const profileImage = userProfile?.image?.startsWith("http")
+    ? userProfile.image
+    : `${API_BASE_URL}${userProfile?.image || "/images/user.png"}`;
+
   return (
     <nav className="bg-[#ffffff] shadow-md sticky top-0 z-50">
       <div className="mx-auto max-w-[1580px] px-6 lg:px-12 py-6 flex justify-between items-center">
-        <button onClick={() => setOpen(true)} className="lg:hidden text-black border-2 p-2 rounded-lg">
+        <button
+          onClick={() => setOpen(true)}
+          className="lg:hidden text-black border-2 p-2 rounded-lg"
+        >
           <Menu className="w-6 h-6" />
         </button>
         <Link href="/">
@@ -79,31 +89,62 @@ export default function Navbar() {
             <li key={index} className="relative group">
               <Link
                 href={item.path}
-                className={`flex items-center transition ${pathname === item.path ? "text-[#01336F] font-bold" : "text-[#5F5F5F] hover:text-black"}`}
+                className={`flex items-center transition ${
+                  pathname === item.path
+                    ? "text-[#01336F] font-bold"
+                    : "text-[#5F5F5F] hover:text-black"
+                }`}
               >
                 {item.title}
               </Link>
             </li>
           ))}
         </ul>
-        <div className="hidden lg:flex items-center gap-10 ml-10">
-          {userProfile ? (
-            <Dropdown menu={{ items }} placement="bottomRight" arrow>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <img src={userProfile?.data?.image || "/images/user.png"} alt="User Avatar" className="w-10 h-10 rounded-full border" />
-              </div>
-            </Dropdown>
-          ) : (
-            <Link href="/login">
-              <button className="bg-[#01336F] text-white px-8 py-4 rounded-lg text-[18px]">Sign Up</button>
-            </Link>
-          )}
-        </div>
+        <div className="hidden lg:flex items-center gap-6 ml-10">
+      {/* Notification Bell */}
+      <div className="border border-gray-300 rounded-full ">
+      <div className="relative size-12 flex items-center justify-center rounded-full  ">
+        <Bell size={28} className="text-black " />
+        {/* Notification Badge */}
+        <span className="absolute top-1 right-1 bg-[#012A60] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+          1
+        </span>
       </div>
-      <div className={`fixed top-0 left-0 h-full w-80 bg-[#daedf2] z-50 shadow-lg transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"}`}>
+      </div>
+
+      {userProfile ? (
+        <Dropdown menu={{ items }} placement="bottomRight" arrow>
+          <div className="flex items-center gap-3 cursor-pointer">
+            <img
+              src={profileImage || "/images/user.png"}
+              alt="User Avatar"
+              className="size-12 rounded-full border object-cover"
+              onError={(e) => (e.currentTarget.src = "/images/user.png")}
+            />
+          </div>
+        </Dropdown>
+      ) : (
+        <Link href="/login">
+          <button className="bg-[#01336F] text-white px-8 py-4 rounded-lg text-[18px]">
+            Sign Up
+          </button>
+        </Link>
+      )}
+    </div>
+      </div>
+
+      {/* Mobile Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-80 bg-[#daedf2] z-50 shadow-lg transform transition-transform ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         <div className="flex justify-between bg-white items-center px-4 py-3 border-b">
           <img src="/images/mobileLogo.png" alt="Logo" />
-          <button onClick={() => setOpen(false)} className="text-black border-2 p-2 rounded-lg">
+          <button
+            onClick={() => setOpen(false)}
+            className="text-black border-2 p-2 rounded-lg"
+          >
             <X />
           </button>
         </div>
@@ -112,7 +153,11 @@ export default function Navbar() {
             <Link
               key={index}
               href={item.path}
-              className={`block py-2 ${pathname === item.path ? "text-blue-600 font-bold" : "text-gray-700 hover:text-black"}`}
+              className={`block py-2 ${
+                pathname === item.path
+                  ? "text-blue-600 font-bold"
+                  : "text-gray-700 hover:text-black"
+              }`}
               onClick={() => setOpen(false)}
             >
               {item.title}
@@ -120,7 +165,14 @@ export default function Navbar() {
           ))}
         </div>
       </div>
-      {open && <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={() => setOpen(false)}></div>}
+
+      {/* Overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setOpen(false)}
+        ></div>
+      )}
     </nav>
   );
 }
