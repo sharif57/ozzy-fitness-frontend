@@ -44,12 +44,7 @@ interface ProfileData {
   verified: boolean;
 }
 
-interface UpdateProfileData {
-  name?: string;
-  email?: string;
-  phone?: string;
-  image?: string;
-}
+
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
