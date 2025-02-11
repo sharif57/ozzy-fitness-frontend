@@ -35,6 +35,9 @@ p {
 .ant-picker-calendar .ant-picker-cell-in-view {
   color: #ededed !important;
 }
+.ant-form-item-label >label{
+  color: white !important;
+}
 
 .ant-picker-calendar .ant-picker-cell .ant-picker-cell-inner {
   position: relative;

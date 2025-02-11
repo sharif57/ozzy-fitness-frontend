@@ -55,7 +55,6 @@
 //   },
 // ];
 
-
 // const MealPlans: React.FC = () => {
 //   const [openResponsive, setOpenResponsive] = useState(false);
 //   const {} = useNutritionDetailsQuery()
@@ -119,8 +118,8 @@
 //                   </div>
 //                   {/* Chat Input Area */}
 //                   <div className="mt-4 flex gap-2">
-//                   <input 
-//                   type="text" 
+//                   <input
+//                   type="text"
 //                   placeholder="Type your message..."
 //                   className="flex-1 p-2 border rounded-lg"
 //                   />
@@ -134,8 +133,8 @@
 //                   onClick={() => setOpenResponsive(true)}
 //                   className="size-6 cursor-pointer hover:text-blue-500"
 //                   />
-//                   <IoMdShareAlt 
-//                   className="size-6 cursor-pointer hover:text-blue-500" 
+//                   <IoMdShareAlt
+//                   className="size-6 cursor-pointer hover:text-blue-500"
 //                   onClick={async () => {
 //                     try {
 //                     await navigator.share({
@@ -244,42 +243,42 @@
 //             </div>
 //           </div>
 
-//           {/* Related Recipes Section - Right Side */}
-//           <div className="md:w-1/3 mt-5 space-y-14 ">
-//             <div className="border p-4 rounded-lg">
-//               <h2 className="text-xl font-semibold mb-3">Related Recipes</h2>
-//               <div className="space-y-3">
-//                 {plans.map((plan) => (
-//                   <div
-//                     key={plan.id}
-//                     className="lg:flex gap-3 items-center  p-3 rounded-lg shadow-sm"
-//                   >
-//                     <Image
-//                       width={500}
-//                       height={200}
-//                       src={plan.image}
-//                       alt={plan.title}
-//                       className="w-24 h-16 rounded-md object-cover"
-//                     />
-//                     <div>
-//                       <h3 className="text-md font-medium">{plan.title}</h3>
-//                       <p className="text-sm text-gray-500">{plan.Nutrition}</p>
-//                     </div>
-//                     <span className="ml-auto text-[#545454] font-normal flex gap-2 items-center">
-//                       <Star
-//                         size={16}
-//                         color="#FB953B"
-//                         strokeWidth={2.75}
-//                         absoluteStrokeWidth
-//                         className=""
-//                       />{" "}
-//                       {plan.rating}
-//                     </span>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-        
+// {/* Related Recipes Section - Right Side */}
+// <div className="md:w-1/3 mt-5 space-y-14 ">
+//   <div className="border p-4 rounded-lg">
+//     <h2 className="text-xl font-semibold mb-3">Related Recipes</h2>
+//     <div className="space-y-3">
+//       {plans.map((plan) => (
+//         <div
+//           key={plan.id}
+//           className="lg:flex gap-3 items-center  p-3 rounded-lg shadow-sm"
+//         >
+//           <Image
+//             width={500}
+//             height={200}
+//             src={plan.image}
+//             alt={plan.title}
+//             className="w-24 h-16 rounded-md object-cover"
+//           />
+//           <div>
+//             <h3 className="text-md font-medium">{plan.title}</h3>
+//             <p className="text-sm text-gray-500">{plan.Nutrition}</p>
+//           </div>
+//           <span className="ml-auto text-[#545454] font-normal flex gap-2 items-center">
+//             <Star
+//               size={16}
+//               color="#FB953B"
+//               strokeWidth={2.75}
+//               absoluteStrokeWidth
+//               className=""
+//             />{" "}
+//             {plan.rating}
+//           </span>
+//         </div>
+//       ))}
+//     </div>
+//   </div>
+
 //           </div>
 //         </div>
 //       </div>
@@ -292,7 +291,6 @@
 
 // export default MealPlans;
 
-
 "use client";
 
 import { Sparkles, Star } from "lucide-react";
@@ -304,6 +302,7 @@ import { IoMdShareAlt } from "react-icons/io";
 import { useParams } from "next/navigation";
 import { useNutritionDetailsQuery } from "@/redux/features/nutritionSlice";
 import NutritionPlanDetails from "@/pages/NutritionPlan/NutritionPlanDetails";
+import Link from "next/link";
 
 const onChange: CheckboxProps["onChange"] = (e) => {
   console.log(`checked = ${e.target.checked}`);
@@ -315,7 +314,7 @@ const MealPlans: React.FC = () => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure this is set in .env.local
 
   const { data, isLoading, error } = useNutritionDetailsQuery(id);
-  const nutrition = data?.data;
+  const nutrition = data?.data?.nutrition;
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -338,7 +337,7 @@ const MealPlans: React.FC = () => {
 
   return (
     <div>
-       <div>
+      <div>
         <NutritionPlanDetails></NutritionPlanDetails>
       </div>
       <div className="container mx-auto lg:p-6 p-2 bg-white">
@@ -350,7 +349,12 @@ const MealPlans: React.FC = () => {
                   {nutrition?.title}
                 </h1>
                 <p className="text-gray-500 text-[20px] font-normal mb-5 flex items-center gap-2">
-                  <Star size={24} color="#FB953B" strokeWidth={2.75} absoluteStrokeWidth />
+                  <Star
+                    size={24}
+                    color="#FB953B"
+                    strokeWidth={2.75}
+                    absoluteStrokeWidth
+                  />
                   {nutrition?.rating} ({nutrition?.reviewsCount} reviews)
                 </p>
               </div>
@@ -380,22 +384,59 @@ const MealPlans: React.FC = () => {
               src={imageUrl}
               alt={nutrition?.title}
               className="w-full rounded-lg object-cover"
-              onError={(e) => (e.currentTarget.src = "https://cdn-icons-png.flaticon.com/128/236/236831.png")}
+              onError={(e) =>
+                (e.currentTarget.src =
+                  "https://cdn-icons-png.flaticon.com/128/236/236831.png")
+              }
             />
 
             {/* Progress Bars - Nutritional Values */}
             <div className="p-6 flex flex-col items-center">
-              <Flex wrap gap="small" className="w-full flex justify-between items-center relative">
+              <Flex
+                wrap
+                gap="small"
+                className="w-full flex justify-between items-center relative"
+              >
                 {[
-                  { label: "Calories", value: nutrition?.calories, percent: (nutrition?.calories / 500) * 100, color: "#01336F" },
-                  { label: "Protein", value: nutrition?.protein, percent: (nutrition?.protein / 50) * 100, color: "#B1DD34" },
-                  { label: "Carbs", value: nutrition?.carbohydrate, percent: (nutrition?.carbohydrate / 100) * 100, color: "#FED161" },
-                  { label: "Fat", value: nutrition?.fat, percent: (nutrition?.fat / 100) * 100, color: "#FEA4A4" },
-                  { label: "Fiber", value: nutrition?.fiber, percent: (nutrition?.fiber / 30) * 100, color: "#C7A8FF" },
+                  {
+                    label: "Calories",
+                    value: nutrition?.calories,
+                    percent: (nutrition?.calories / 500) * 100,
+                    color: "#01336F",
+                  },
+                  {
+                    label: "Protein",
+                    value: nutrition?.protein,
+                    percent: (nutrition?.protein / 50) * 100,
+                    color: "#B1DD34",
+                  },
+                  {
+                    label: "Carbs",
+                    value: nutrition?.carbohydrate,
+                    percent: (nutrition?.carbohydrate / 100) * 100,
+                    color: "#FED161",
+                  },
+                  {
+                    label: "Fat",
+                    value: nutrition?.fat,
+                    percent: (nutrition?.fat / 100) * 100,
+                    color: "#FEA4A4",
+                  },
+                  {
+                    label: "Fiber",
+                    value: nutrition?.fiber,
+                    percent: (nutrition?.fiber / 30) * 100,
+                    color: "#C7A8FF",
+                  },
                 ].map((item, index) => (
-                  <div key={index} className="flex flex-col items-center justify-center relative p-4">
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center relative p-4"
+                  >
                     {/* Right Side Divider (Border) */}
-                    {index !== 4 && <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 h-24 border-r-2 border-gray-400"></div>}
+                    {index !== 4 && (
+                      <div className="absolute right-[-50px] top-1/2 transform -translate-y-1/2 h-24 border-r-2 border-gray-400"></div>
+                    )}
                     <Progress
                       type="circle"
                       percent={parseFloat(item.percent.toFixed(2))} // ✅ Ensures 2 decimal places
@@ -418,7 +459,9 @@ const MealPlans: React.FC = () => {
                 {nutrition?.ingredients.map((ingredient, index) => (
                   <li key={index}>
                     <Checkbox onChange={onChange}>
-                      <p className="text-[18px] font-normal text-[#333333]">{ingredient}</p>
+                      <p className="text-[18px] font-normal text-[#333333]">
+                        {ingredient}
+                      </p>
                     </Checkbox>
                   </li>
                 ))}
@@ -431,11 +474,55 @@ const MealPlans: React.FC = () => {
               <p className="text-gray-600">{nutrition?.instruction}</p>
             </div>
           </div>
+          <div className="lg:w-[520px] mt-4 ">
+            <div className="border  rounded-lg p-3">
+              <h1 className="text-[24px] font-semibold mb-3">
+                Related Recipes
+              </h1>
+              <div className="">
+                {data?.data?.relatedNutritions?.map((plan) => (
+                  <Link key={plan.id} href={`/nutritionplan1/${plan._id}`}>
+                    <div className="lg:flex gap-3 items-center border  my-5  p-3 rounded-lg shadow-sm">
+                      <img
+                        src={`${API_BASE_URL}${plan?.image}`}
+                        alt={plan.title}
+                        className="lg:w-[140px] w-full lg:h-[80px] h-[160px] rounded-md object-cover"
+                      />
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-md font-medium">{plan.title}</h3>
+                          <span className="ml-auto text-[#545454] font-normal flex gap-2 items-center">
+                            <Star
+                              size={16}
+                              color="#FB953B"
+                              strokeWidth={2.75}
+                              absoluteStrokeWidth
+                              className=""
+                            />{" "}
+                            {plan.rating}
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500">
+                          {plan.instruction.slice(0, 100)}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Chat with Nutritionist Modal */}
-      <Modal title="Chat with Nutritionist" centered open={openModal} onCancel={() => setOpenModal(false)} footer={null}>
+      <Modal
+        title="Chat with Nutritionist"
+        centered
+        open={openModal}
+        onCancel={() => setOpenModal(false)}
+        footer={null}
+      >
         <div className="flex flex-col gap-4 h-[400px] overflow-y-auto">
           <div className="flex gap-2">
             <div className="bg-blue-100 p-3 rounded-lg max-w-[80%]">
@@ -449,8 +536,14 @@ const MealPlans: React.FC = () => {
           </div>
         </div>
         <div className="mt-4 flex gap-2">
-          <input type="text" placeholder="Type your message..." className="flex-1 p-2 border rounded-lg" />
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Send</button>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            className="flex-1 p-2 border rounded-lg"
+          />
+          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            Send
+          </button>
         </div>
       </Modal>
 

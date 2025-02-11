@@ -43,7 +43,7 @@ export default function Navbar() {
     { key: "1", label: "My Account", disabled: true },
     { type: "divider" },
     { key: "2", label: <Link href="/profile">Profile</Link> },
-    { key: "3", label: <Link href="/appointments">My Appointment</Link> },
+    { key: "3", label: <Link href="/myappointment">My Appointment</Link> },
     { key: "4", label: <Link href="/workoutplan1">My Workout Plan</Link> },
     { type: "divider" },
     { key: "5", label: <button onClick={handleLogOut}>Logout</button> },
