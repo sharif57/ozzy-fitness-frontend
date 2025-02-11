@@ -10,6 +10,7 @@ import { useUserProfileQuery } from "@/redux/features/userSlice";
 import { Dropdown } from "antd";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useMyWorkPlanAddQuery } from "@/redux/features/userworkplanSlice";
 
 interface UserProfile {
   name: string;
@@ -26,6 +27,8 @@ export default function Navbar() {
   const { data: userData } = useUserProfileQuery<{ data: UserProfile }>();
   const userProfile = userData?.data;
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure .env.local has this variable
+  const { data } = useMyWorkPlanAddQuery(undefined);
+  const workPlans = data?.data || [];
 
   const handleLogOut = () => {
     if (window.confirm("Are you sure you want to logout?")) {
@@ -44,7 +47,7 @@ export default function Navbar() {
     { type: "divider" },
     { key: "2", label: <Link href="/profile">Profile</Link> },
     { key: "3", label: <Link href="/myappointment">My Appointment</Link> },
-    { key: "4", label: <Link href="/workoutplan1">My Workout Plan</Link> },
+    { key: "4", label: <Link href="/myworkoutplan">My Workout Plan</Link> },
     { type: "divider" },
     { key: "5", label: <button onClick={handleLogOut}>Logout</button> },
   ];
@@ -101,36 +104,38 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="hidden lg:flex items-center gap-6 ml-10">
-      {/* Notification Bell */}
-      <div className="border border-gray-300 rounded-full ">
-      <div className="relative size-12 flex items-center justify-center rounded-full  ">
-        <Bell size={28} className="text-black " />
-        {/* Notification Badge */}
-        <span className="absolute top-1 right-1 bg-[#012A60] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-          1
-        </span>
-      </div>
-      </div>
+          {/* Notification Bell */}
 
-      {userProfile ? (
-        <Dropdown menu={{ items }} placement="bottomRight" arrow>
-          <div className="flex items-center gap-3 cursor-pointer">
-            <img
-              src={profileImage || "/images/user.png"}
-              alt="User Avatar"
-              className="size-12 rounded-full border object-cover"
-              onError={(e) => (e.currentTarget.src = "/images/user.png")}
-            />
-          </div>
-        </Dropdown>
-      ) : (
-        <Link href="/login">
-          <button className="bg-[#01336F] text-white px-8 py-4 rounded-lg text-[18px]">
-            Sign Up
-          </button>
-        </Link>
-      )}
-    </div>
+          {userProfile ? (
+            <div className="flex items-center gap-4 ">
+              <div className="border border-gray-300 rounded-full ">
+                <div className="relative size-12 flex items-center justify-center rounded-full  ">
+                  <Bell size={28} className="text-black " />
+                  {/* Notification Badge */}
+                  <span className="absolute top-1 right-1 bg-[#012A60] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                    {workPlans.length}
+                  </span>
+                </div>
+              </div>
+              <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                <div className="flex items-center gap-3 cursor-pointer">
+                  <img
+                    src={profileImage || "/images/user.png"}
+                    alt="User Avatar"
+                    className="size-12 rounded-full border object-cover"
+                    onError={(e) => (e.currentTarget.src = "/images/user.png")}
+                  />
+                </div>
+              </Dropdown>
+            </div>
+          ) : (
+            <Link href="/login">
+              <button className="bg-[#01336F] text-white px-8 py-4 rounded-lg text-[18px]">
+                Sign Up
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* Mobile Sidebar */}

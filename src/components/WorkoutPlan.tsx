@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
 import { useAllWorkPlanQuery } from "@/redux/features/workSlice";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 // Fetch environment variable for API base URL
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; 
@@ -24,6 +26,8 @@ interface WorkoutPlan {
 const WorkoutPlan: React.FC = () => {
   const { data, isLoading, error } = useAllWorkPlanQuery(undefined);
   const [clientData, setClientData] = useState<WorkoutPlan[]>([]);
+    const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
+  
 
   // Ensure data is set only on the client to prevent hydration mismatch
   useEffect(() => {
@@ -32,11 +36,53 @@ const WorkoutPlan: React.FC = () => {
     }
   }, [data]);
 
+  const handleAddToPlan = async (workoutPlanId: string) => {
+      // try {
+      //   const result = await bookAppointment({ workoutPlanId }).unwrap();
+      //   console.log("Appointment booked successfully:", result);
+      //   // You can add a toast or notification here to inform the user
+      // } catch (err) {
+      //   console.error("Failed to book appointment:", err);
+      //   // Handle error (e.g., show an error message to the user)
+      // }
+      try {
+        const result = await bookAppointment({ workoutPlanId }).unwrap();
+        console.log("Appointment booked successfully:", result);
+  
+        // ✅ Show success toast
+        toast.success("Appointment booked successfully!", {
+          position: "top-center",
+          autoClose: 1000, // Toast disappears in 3 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } catch (err) {
+        console.error("Failed to book appointment:", err);
+  
+        // ❌ Show error toast
+        toast.error("Failed to book appointment. Please try again.", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    };
+
   if (isLoading) return <p className="text-center">Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (
     <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
+            <ToastContainer></ToastContainer>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-[40px] font-semibold">Workout Plan</h2>
@@ -80,7 +126,8 @@ const WorkoutPlan: React.FC = () => {
               <Link href={`/workoutplan1/${plan._id}`  } className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition">
                 <button>See Details</button>
               </Link>
-              <button className="w-1/2 py-2 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition">
+              <button                 onClick={() => handleAddToPlan(plan._id)}
+ className="w-1/2 py-2 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition">
                 Add to Plan
               </button>
             </div>

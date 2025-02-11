@@ -47,6 +47,8 @@ interface ProfileData {
 
 
 export const userApi = baseApi.injectEndpoints({
+  overrideExisting: true,
+
   endpoints: (builder) => ({
     // Fetch user profile
     userProfile: builder.query<ProfileData, void>({

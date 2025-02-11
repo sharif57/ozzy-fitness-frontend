@@ -2,6 +2,7 @@
 import baseApi from "../api/baseApi";
 
 export const workApi = baseApi.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
 
 

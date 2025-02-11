@@ -2,6 +2,8 @@
 import baseApi from "../api/baseApi";
 
 export const appointmentApi = baseApi.injectEndpoints({
+  overrideExisting: true,
+
   endpoints: (builder) => ({
     appointmentAll: builder.query({
       query: () => ({
@@ -38,7 +40,7 @@ export const appointmentApi = baseApi.injectEndpoints({
       invalidatesTags: ["User"], // Invalidates 'User' tag after mutation
     }),
 
-    
+
 
   }),
 });

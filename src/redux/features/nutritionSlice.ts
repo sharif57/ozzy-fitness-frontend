@@ -2,6 +2,8 @@
 import baseApi from "../api/baseApi";
 
 export const nutritionApi = baseApi.injectEndpoints({
+  overrideExisting: true,
+
   endpoints: (builder) => ({
 
 
@@ -24,7 +26,7 @@ export const nutritionApi = baseApi.injectEndpoints({
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         }),
-        providesTags: ["Question"], // Marks the fetched data with the "Question" tag
+        providesTags: ["NutritionPlan"], // Marks the fetched data with the "Question" tag
       }),
   
 

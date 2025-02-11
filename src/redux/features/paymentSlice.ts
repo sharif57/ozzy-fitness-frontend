@@ -2,6 +2,8 @@
 import baseApi from "../api/baseApi";
 
 export const paymentApi = baseApi.injectEndpoints({
+  overrideExisting: true,
+
   endpoints: (builder) => ({
 
 

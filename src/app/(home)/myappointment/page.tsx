@@ -3,6 +3,28 @@
 import { useBookAppointmentQuery } from "@/redux/features/bookingSlice";
 import React from "react";
 
+// ✅ Define TypeScript Interface for Appointment Data
+interface Appointment {
+  _id: string;
+  name: string;
+  age: number;
+  gender: string;
+  description: string;
+  selectedDate: string;
+  selectedTime: string;
+  paymentAmount: number;
+  paymentStatus: "COMPLETED" | "PENDING";
+  appointmentId: {
+    _id: string;
+    title: string;
+    image?: string;
+    description: string[];
+    price: number;
+    availableTimes: string[];
+    status: boolean;
+  };
+}
+
 export default function MyAppointment() {
   const { data } = useBookAppointmentQuery(undefined);
 
@@ -10,7 +32,7 @@ export default function MyAppointment() {
   const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_API_KEY || "";
 
   // Extracting appointment data safely
-  const appointments = data?.data || [];
+  const appointments: Appointment[] = data?.data || [];
 
   return (
     <div className="lg:p-6 p-3 container mx-auto">
@@ -19,20 +41,20 @@ export default function MyAppointment() {
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-wrap">
         {appointments.length > 0 ? (
-          appointments.map((appointment) => {
+          appointments.map((appointment: Appointment) => {
             const imageUrl = appointment.appointmentId?.image
-              ? `${IMAGE_BASE_URL}${appointment.appointmentId.image}` // Append base URL
+              ? `${IMAGE_BASE_URL}${appointment.appointmentId.image}`
               : "/default-avatar.png"; // Fallback image
 
             return (
               <div
                 key={appointment._id}
-                className="bg-white shadow-md rounded-lg p-4  transition hover:shadow-xl"
+                className="bg-white shadow-md rounded-lg p-4 transition hover:shadow-xl"
               >
                 <img
                   src={imageUrl}
                   alt={appointment.appointmentId?.title || "Appointment"}
-                  className="w-full h-[330px] object-cover rounded-lg"
+                  className="w-full h-[280px] object-cover rounded-lg"
                 />
                 <div className="mt-4">
                   <div className="flex justify-between items-center">

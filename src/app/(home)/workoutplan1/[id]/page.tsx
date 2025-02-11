@@ -5,10 +5,74 @@ import Appointment from "@/components/Appointment";
 import WorkoutBanner from "@/pages/WorkoutPlan/WorkoutBanner";
 import { useWorkPlanDetailsQuery } from "@/redux/features/workSlice";
 import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
+
+interface Exercise {
+  _id: string;
+  exerciseName: string;
+}
+
+interface WorkoutSection {
+  exercises: Exercise[];
+}
+
+interface WorkoutDay {
+  _id: string;
+  day: number;
+  warmUp: WorkoutSection;
+  mainWorkout: WorkoutSection;
+  coolDown: WorkoutSection;
+}
 
 export default function WorkoutPlanPage() {
   const params = useParams(); // Get the params as a Promise
   const [workoutId, setWorkoutId] = useState<string | null>(null);
+  const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
+
+
+
+   const handleAddToPlan = async (workoutPlanId: string) => {
+        // try {
+        //   const result = await bookAppointment({ workoutPlanId }).unwrap();
+        //   console.log("Appointment booked successfully:", result);
+        //   // You can add a toast or notification here to inform the user
+        // } catch (err) {
+        //   console.error("Failed to book appointment:", err);
+        //   // Handle error (e.g., show an error message to the user)
+        // }
+        try {
+          const result = await bookAppointment({ workoutPlanId }).unwrap();
+          console.log("Appointment booked successfully:", result);
+    
+          // ✅ Show success toast
+          toast.success("Appointment booked successfully!", {
+            position: "top-center",
+            autoClose: 1000, // Toast disappears in 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } catch (err) {
+          console.error("Failed to book appointment:", err);
+    
+          // ❌ Show error toast
+          toast.error("Failed to book appointment. Please try again.", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      };
+  
 
   // Unwrap the params correctly
   useEffect(() => {
@@ -30,6 +94,8 @@ export default function WorkoutPlanPage() {
     <div>
       <WorkoutBanner />
       <div className="bg-[#fafafa]">
+      <ToastContainer></ToastContainer>
+
         <div className="container mx-auto lg:p-6 p-2 mb-16">
           <h1 className="lg:text-[48px] text-3xl font-semibold text-center my-10 text-[#000000]">
             Plan Overview
@@ -103,7 +169,8 @@ export default function WorkoutPlanPage() {
 
           {/* Add to Plan Button */}
           <Link href="/workoutplan1/day" className="flex justify-end mt-16">
-            <button className="px-10 py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition">
+            <button onClick={() => data?.data?._id && handleAddToPlan(data.data._id)}
+ className="px-10 py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition">
               Add to Plan
             </button>
           </Link>

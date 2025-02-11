@@ -25,11 +25,12 @@ const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://115.127.156.13:3005/api/v1" }),
    tagTypes: [
-    "Question",
+    "AddPlan",
     "Package",
     "Room",
     "User",
-    "WorkoutPlan"
+    "WorkoutPlan",
+    "NutritionPlan"
   ], // Declare global tag types
   endpoints: () => ({}), // Empty object, later extended using injectEndpoints
 });
