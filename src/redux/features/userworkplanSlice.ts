@@ -30,10 +30,35 @@ export const userWorkPlanApi = baseApi.injectEndpoints({
           },
         }),
         invalidatesTags: ["AddPlan"], // Invalidates 'User' tag after mutation
-      })
+      }),
+
+
+      // userWorkPlanDetails: builder.query({
+      //   query: (_id) => ({
+      //     url: `/work-plan/user-work-plan-details/${_id}`,
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      //     },
+      //   }),
+      //   providesTags: ["Work"], // Marks the fetched data with the "Question" tag
+      // }),
+
+      userWorkPlanDetails: builder.query({
+        query: ({ _id, day }) => ({
+          url: `/work-plan/user-work-plan-details/${_id}?day=${day}`,
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }),
+        providesTags: ["Work"],
+      }),
+      
   
+      
 
   }),
 });
 
-export const {   useBookAppointmentMutation , useMyWorkPlanAddQuery } = userWorkPlanApi;
+export const {   useBookAppointmentMutation , useMyWorkPlanAddQuery, useUserWorkPlanDetailsQuery } = userWorkPlanApi;

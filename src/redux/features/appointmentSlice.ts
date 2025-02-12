@@ -13,7 +13,7 @@ export const appointmentApi = baseApi.injectEndpoints({
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }),
-      providesTags: ["Room"],
+      providesTags: ["Appointment"],
     }),
 
     appointmentDetails: builder.query({
@@ -24,7 +24,7 @@ export const appointmentApi = baseApi.injectEndpoints({
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }),
-      providesTags: ["Question"], // Marks the fetched data with the "Question" tag
+      providesTags: ["Appointment"], // Marks the fetched data with the "Question" tag
     }),
 
     appointmentBooking: builder.mutation({
@@ -37,7 +37,7 @@ export const appointmentApi = baseApi.injectEndpoints({
           // "Content-Type": "application/json",
         },
       }),
-      invalidatesTags: ["User"], // Invalidates 'User' tag after mutation
+      invalidatesTags: ["Appointment"], // Invalidates 'User' tag after mutation
     }),
 
 

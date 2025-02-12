@@ -108,15 +108,17 @@ export default function Navbar() {
 
           {userProfile ? (
             <div className="flex items-center gap-4 ">
-              <div className="border border-gray-300 rounded-full ">
-                <div className="relative size-12 flex items-center justify-center rounded-full  ">
-                  <Bell size={28} className="text-black " />
-                  {/* Notification Badge */}
-                  <span className="absolute top-1 right-1 bg-[#012A60] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                    {workPlans.length}
-                  </span>
+              <Link href={'/myworkoutplan'}>
+                <div className="border border-gray-300 rounded-full ">
+                  <div className="relative size-12 flex items-center justify-center rounded-full  ">
+                    <Bell size={28} className="text-black " />
+                    {/* Notification Badge */}
+                    <span className="absolute top-1 right-1 bg-[#012A60] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                      {workPlans.length}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <Dropdown menu={{ items }} placement="bottomRight" arrow>
                 <div className="flex items-center gap-3 cursor-pointer">
                   <img

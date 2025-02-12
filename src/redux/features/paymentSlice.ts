@@ -7,31 +7,34 @@ export const paymentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
 
-    paymentData: builder.query({
-      query: () => ({
+    // paymentData: builder.mutation({
+    //   query: () => ({
+    //     url: "/payment/create-checkout-session",
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //   }),
+    //   invalidatesTags: ["Room"],
+    // }),
+
+    paymentData: builder.mutation({
+      query: (payment) => ({
         url: "/payment/create-checkout-session",
         method: "POST",
+        body: payment,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
         },
       }),
-      providesTags: ["Room"],
+      invalidatesTags: ["Payment"], // Invalidates 'User' tag after mutation
     }),
 
-    // workPlanDetails: builder.query({
-    //     query: (_id) => ({
-    //       url: `/workout-plan/workout-plan-details/${_id}`,
-    //       method: "GET",
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    //       },
-    //     }),
-    //     providesTags: ["Question"], // Marks the fetched data with the "Question" tag
-    //   }),
-  
+
 
   }),
 });
 
-export const {  usePaymentDataQuery } = paymentApi;
+export const {  usePaymentDataMutation } = paymentApi;

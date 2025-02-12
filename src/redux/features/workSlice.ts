@@ -14,7 +14,7 @@ export const workApi = baseApi.injectEndpoints({
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }),
-      providesTags: ["Room"],
+      providesTags: ["Work"],
     }),
 
     workPlanDetails: builder.query({
@@ -25,7 +25,7 @@ export const workApi = baseApi.injectEndpoints({
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         }),
-        providesTags: ["Question"], // Marks the fetched data with the "Question" tag
+        providesTags: ["Work"], // Marks the fetched data with the "Question" tag
       }),
   
 

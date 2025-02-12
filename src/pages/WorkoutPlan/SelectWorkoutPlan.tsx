@@ -115,6 +115,7 @@ interface WorkoutPlan {
   description: string;
   image: string;
   workouts: Workout[];
+  totalDays: number;
 }
 
 const SelectWorkoutPlan: React.FC = () => {
@@ -203,11 +204,11 @@ const SelectWorkoutPlan: React.FC = () => {
             <div className="p-4 space-y-2">
               <div className="flex justify-between items-center">
                 <h3 className="text-[24px] font-medium">{plan.planName}</h3>
-                {/* <h3 className="text-lg font-semibold">
+                <h3 className="text-lg font-semibold text-[#545454]">
                   {plan.workouts.length > 0
-                    ? `Day: ${plan.workouts[0].day}`
+                    ? `Day: ${plan.totalDays}`
                     : "No Workouts"}
-                </h3> */}
+                </h3>
               </div>
               <p className="text-gray-500 text-sm">{plan.description}</p>
             </div>

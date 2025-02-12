@@ -10,7 +10,7 @@ export const authApi = createApi({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
       if (typeof window !== "undefined") {
-        const token = localStorage.getItem("accessToken"); // Access localStorage safely
+        const token = localStorage.getItem("accessToken"); // Ac  cess localStorage safely
         if (token) {
           headers.set("Authorization", `Bearer ${token}`);
         }

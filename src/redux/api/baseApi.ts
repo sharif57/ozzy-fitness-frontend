@@ -30,7 +30,11 @@ const baseApi = createApi({
     "Room",
     "User",
     "WorkoutPlan",
-    "NutritionPlan"
+    "NutritionPlan",
+    "Work",
+    'Review',
+    'Appointment',
+    "Payment"
   ], // Declare global tag types
   endpoints: () => ({}), // Empty object, later extended using injectEndpoints
 });

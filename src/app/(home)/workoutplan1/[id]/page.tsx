@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import Appointment from "@/components/Appointment";
 import WorkoutBanner from "@/pages/WorkoutPlan/WorkoutBanner";
 import { useWorkPlanDetailsQuery } from "@/redux/features/workSlice";
-import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
 
@@ -30,7 +29,7 @@ export default function WorkoutPlanPage() {
   const [workoutId, setWorkoutId] = useState<string | null>(null);
   const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
 
-
+console.log(workoutId,'workoutplan')
 
    const handleAddToPlan = async (workoutPlanId: string) => {
         // try {
@@ -89,6 +88,7 @@ export default function WorkoutPlanPage() {
   if (error) return <p>Error loading data.</p>;
 
   const workoutPlan = data?.data?.workouts || [];
+  console.log(workoutPlan)
 
   return (
     <div>
@@ -168,12 +168,12 @@ export default function WorkoutPlanPage() {
           </div>
 
           {/* Add to Plan Button */}
-          <Link href="/workoutplan1/day" className="flex justify-end mt-16">
+          <div className="flex justify-end mt-16">
             <button onClick={() => data?.data?._id && handleAddToPlan(data.data._id)}
  className="px-10 py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition">
               Add to Plan
             </button>
-          </Link>
+          </div>
         </div>
       </div>
       <Appointment />

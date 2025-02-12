@@ -95,6 +95,7 @@
 "use client";
 
 import { useMyWorkPlanAddQuery } from "@/redux/features/userworkplanSlice";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 /* Define TypeScript Interface */
@@ -143,6 +144,7 @@ export default function WorkPlan() {
 
   // Extract workout plans safely
   const workPlans: WorkoutPlan[] = data?.data || [];
+  console.log(workPlans);
 
   return (
     <div className="lg:p-6 p-3 container mx-auto">
@@ -159,35 +161,37 @@ export default function WorkPlan() {
               : "/default-workout.png"; // ✅ Fixed dynamic image handling
             const { totalDays, completedDays } = workPlan; // ✅ Extract totalDays & completedDays
 
-            const total = `${parseFloat(((completedDays / totalDays) * 100).toFixed(2))}%`;
+            const total = `${parseFloat(
+              ((completedDays / totalDays) * 100).toFixed(2)
+            )}%`;
             console.log(total);
 
             return (
-              <div
-                key={workPlan._id}
-                className="bg-white shadow-md rounded-lg p-4 transition hover:shadow-xl relative"
-              >
-                {/* ✅ Fixed Hydration Issue by Ensuring Image Loads After Hydration */}
-                {hydrated && (
-                  <img
-                    src={imageUrl}
-                    alt={planName || "Workout Plan"}
-                    className="w-full h-[200px] object-cover rounded-lg"
-                  />
-                )}
+              <Link href={`/myworkoutplan/${workPlan._id}`} key={workPlan._id}>
+                <div className="bg-white shadow-md rounded-lg p-4 transition hover:shadow-xl relative">
+                  {/* ✅ Fixed Hydration Issue by Ensuring Image Loads After Hydration */}
+                  {hydrated && (
+                    <img
+                      src={imageUrl}
+                      alt={planName || "Workout Plan"}
+                      className="w-full h-[200px] object-cover rounded-lg"
+                    />
+                  )}
 
-                <div className="mt-4">
-                  <div className="flex justify-between items-center">
-                    <h3 className="lg:text-[20px] text-[18px] font-medium">
-                      {planName}
-                    </h3>
-                    <span className="text-gray-500 text-sm">Time: 4 Week</span>
-                  </div>
+                  <div className="mt-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="lg:text-[20px] text-[18px] font-medium">
+                        {planName}
+                      </h3>
+                      <span className="text-gray-500 text-sm">
+                        Time: 4 Week
+                      </span>
+                    </div>
 
-                  <p className="text-gray-600 text-sm mt-1">{description}</p>
+                    <p className="text-gray-600 text-sm mt-1">{description}</p>
 
-                  {/* ✅ Display totalDays and completedDays */}
-                  {/* <div className="mt-3">
+                    {/* ✅ Display totalDays and completedDays */}
+                    {/* <div className="mt-3">
                     <p className="text-gray-800 font-semibold">
                       Total Days: <span className="text-blue-500">{totalDays}</span>
                     </p>
@@ -197,23 +201,24 @@ export default function WorkPlan() {
                     </p>
                   </div> */}
 
-                  {/* ✅ Progress Bar based on completedDays */}
-                  <div className="mt-4">
-                   <div className="flex justify-between items-center">
-                   <span className="text-[18px] font-bold">Progress</span>
-                   <p >{total}</p>
-                   </div>
-                    <div className="w-full bg-gray-200 rounded-full h-[20px] mt-3">
-                      <div
-                        className="bg-[#00BA00] h-[20px] rounded-full"
-                        style={{
-                          width: `${(completedDays / totalDays) * 100}%`,
-                        }} // ✅ Dynamic progress bar width
-                      ></div>
+                    {/* ✅ Progress Bar based on completedDays */}
+                    <div className="mt-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[18px] font-bold">Progress</span>
+                        <p>{total}</p>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-[20px] mt-3">
+                        <div
+                          className="bg-[#00BA00] h-[20px] rounded-full"
+                          style={{
+                            width: `${(completedDays / totalDays) * 100}%`,
+                          }} // ✅ Dynamic progress bar width
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })
         ) : (
