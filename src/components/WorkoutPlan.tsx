@@ -88,7 +88,7 @@ const WorkoutPlan: React.FC = () => {
         <h2 className="text-[40px] font-semibold">Workout Plan</h2>
         <Link
           href="/workoutplan1"
-          className="text-blue-600 text-[18px] hover:underline font-medium"
+          className="text-[#01336F] text-[18px] hover:underline font-medium"
         >
           See all
         </Link>

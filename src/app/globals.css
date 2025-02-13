@@ -15,11 +15,11 @@
 
 body {
   background: var(--background);
-  font-family: 'Lora', serif;
+  font-family: 'Poppins', serif;
 }
 
 p {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Lora', sans-serif;
 }
 
 .card.ant-card-body{

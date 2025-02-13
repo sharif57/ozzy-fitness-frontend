@@ -139,7 +139,7 @@ export default function ForgotPassword() {
       if (response.success) {
         message.success(response.message || "OTP has been sent to your email!");
         // Navigate to the OTP verification page and pass the email as a query param
-        router.push(`/verifyemail?email=${email}`);
+        router.push(`/resetotp?email=${email}`);
       } else {
         message.error(response.message || "Failed to send OTP.");
       }

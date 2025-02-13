@@ -53,7 +53,7 @@ export default function Login() {
 
         setTimeout(() => {
           router.push("/")
-        }, 1500)
+        })
       } else {
         toast.error(response.message || "Invalid credentials!")
       }
@@ -144,9 +144,11 @@ export default function Login() {
                 </button>
               </div>
 
-              <Link href="/forgot" className="block text-right text-sm mt-2 text-[#345C8C] hover:underline">
+             <div className=" flex justify-end items-end">
+             <Link href="/forgot" className="  text-right text-sm mt-2 text-[#345C8C] hover:underline">
                 Forgot password?
               </Link>
+             </div>
 
               <button
                 type="submit"
@@ -169,3 +171,4 @@ export default function Login() {
     </main>
   )
 }
+

@@ -74,7 +74,7 @@ const Membership: React.FC = () => {
               <h3 className="text-xl font-semibold text-center">
                 {plan.title}
               </h3>
-              <p className="text-blue-700 text-center text-lg font-medium mt-1">
+              <p className="text-[#01336F] text-center text-lg font-medium mt-1">
                 {plan.price}
               </p>
               <hr className="my-4" />
@@ -87,7 +87,7 @@ const Membership: React.FC = () => {
                   key={index}
                   className="flex items-start space-x-2 text-gray-600"
                 >
-                  <span className="text-blue-600">
+                  <span className="text-[#01336F]">
                     <ShieldCheck />
                   </span>
                   <span>{feature}</span>

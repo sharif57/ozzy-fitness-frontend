@@ -479,7 +479,7 @@ const MealPlans: React.FC = () => {
               <h1 className="text-[24px] font-semibold mb-3">
                 Related Recipes
               </h1>
-              <div className="">
+              {/* <div className=""> */}
                 {data?.data?.relatedNutritions?.map((plan) => (
                   <Link key={plan.id} href={`/nutritionplan1/${plan._id}`}>
                     <div className="lg:flex gap-3 items-center border  my-5  p-3 rounded-lg shadow-sm">
@@ -509,7 +509,7 @@ const MealPlans: React.FC = () => {
                     </div>
                   </Link>
                 ))}
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>

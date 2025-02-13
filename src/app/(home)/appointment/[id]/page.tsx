@@ -492,6 +492,129 @@ const AppointmentBooking: React.FC = () => {
     setSelectedDate(value.format("YYYY-MM-DD"));
   };
 
+  // const handleBooking = async (values: Booking) => {
+  //   if (!selectedDate || !selectedTime) {
+  //     Modal.error({
+  //       title: "Error",
+  //       content: "Please select a date and time before booking.",
+  //     });
+  //     return;
+  //   }
+
+  //   try {
+  //     const payload: Booking = {
+  //       ...values,
+  //       age: Number(values.age), // Ensure age is always a number
+  //       appointmentId: appointmentId as string,
+  //       userId: userId as string, // Ensure userId is set
+  //       selectedDate,
+  //       selectedTime,
+  //       paymentStatus: "PENDING",
+  //     };
+  //     console.log(appointmentId,'============>id')
+
+  //     const response = await appointmentBooking(payload).unwrap();
+
+  //     Modal.success({
+  //       title: "Appointment Confirmed ✅",
+  //       content: (
+  //         <div>
+  //           <p>Your appointment is booked for:</p>
+  //           <p>
+  //             <strong>Date:</strong> {selectedDate} <br />
+  //             <strong>Time:</strong> {selectedTime}
+  //           </p>
+  //         </div>
+  //       ),
+  //     });
+
+  //     console.log("Appointment Booking Success:", response);
+  //   } catch (error) {
+  //     console.error("Booking Error:", error);
+  //     Modal.error({
+  //       title: "Booking Failed ❌",
+  //       content: "Something went wrong. Please try again later.",
+  //     });
+  //   }
+  // };
+
+
+  // const handleBooking = async (values: Booking) => {
+  //   if (!selectedDate || !selectedTime) {
+  //     Modal.error({
+  //       title: "Error",
+  //       content: "Please select a date and time before booking.",
+  //     });
+  //     return;
+  //   }
+  
+  //   try {
+  //     const payload: Booking = {
+  //       ...values,
+  //       age: Number(values.age), // Ensure age is always a number
+  //       appointmentId: appointmentId as string,
+  //       userId: userId as string, // Ensure userId is set
+  //       selectedDate,
+  //       selectedTime,
+  //       paymentStatus: "PENDING",
+  //     };
+  
+  //     console.log("Booking Payload:", payload);
+  
+  //     const response = await appointmentBooking(payload).unwrap();
+  //     console.log(response,'=================')
+
+  
+  //     if (!response || !response?.data?.appointmentId) {
+  //       throw new Error("Invalid appointment response: Missing appointmentId");
+  //     }
+  
+  //     console.log("Appointment ID from response:", response.appointmentId);
+  
+  //     Modal.success({
+  //       title: "Appointment Confirmed ✅",
+  //       content: (
+  //         <div>
+  //           <p>Your appointment is booked for:</p>
+  //           <p>
+  //             <strong>Date:</strong> {selectedDate} <br />
+  //             <strong>Time:</strong> {selectedTime}
+  //           </p>
+  //         </div>
+  //       ),
+  //     });
+  
+  //     console.log("Appointment Booking Success:", response);
+  
+  //     // Proceed with payment using the returned appointmentId
+  //     const paymentPayload = {
+  //       appointmentId: response?.data?.appointmentId, // Using appointmentId from response
+        
+  //       // userId: userId as string,
+  //       // amount: values.amount || 0, // Ensure amount is set correctly
+  //       // paymentMethod: "CARD", // Modify based on your payment options
+  //     };
+  
+  //     console.log("Initiating Payment with Payload:", paymentPayload);
+  
+  //     const paymentResponse = await paymentData(paymentPayload).unwrap();
+  
+  //     console.log("Payment Success:", paymentResponse);
+  
+  //     Modal.success({
+  //       title: "Payment Successful ✅",
+  //       content: "Your payment has been processed successfully.",
+  //     });
+  
+  //   } catch (error) {
+  //     console.error("Booking or Payment Error:", error);
+  //     Modal.error({
+  //       title: "Error ❌",
+  //       content: error.message || "Something went wrong. Please try again later.",
+  //     });
+  //   }
+  // };
+  
   const handleBooking = async (values: Booking) => {
     if (!selectedDate || !selectedTime) {
       Modal.error({
@@ -500,7 +623,7 @@ const AppointmentBooking: React.FC = () => {
       });
       return;
     }
-
+  
     try {
       const payload: Booking = {
         ...values,
@@ -511,9 +634,18 @@ const AppointmentBooking: React.FC = () => {
         selectedTime,
         paymentStatus: "PENDING",
       };
-
+  
+      console.log("Booking Payload:", payload);
+  
       const response = await appointmentBooking(payload).unwrap();
-
+      console.log("Booking Response:", response);
+  
+      if (!response || !response?.data?.appointmentId) {
+        throw new Error("Invalid appointment response: Missing appointmentId");
+      }
+  
+      console.log("Appointment ID from response:", response.data.appointmentId);
+  
       Modal.success({
         title: "Appointment Confirmed ✅",
         content: (
@@ -526,17 +658,37 @@ const AppointmentBooking: React.FC = () => {
           </div>
         ),
       });
-
+  
       console.log("Appointment Booking Success:", response);
+  
+      // Proceed with payment using the returned appointmentId
+      const paymentPayload = {
+        appointmentId: response.data._id, // Using appointmentId from response
+      
+      };
+  
+      console.log("Initiating Payment with Payload:", paymentPayload);
+  
+      const paymentResponse = await paymentData(paymentPayload).unwrap();
+  
+      console.log("Payment Success:", paymentResponse);
+  
+      if (paymentResponse?.url) {
+        // Redirect to Stripe payment URL
+        window.location.href = paymentResponse.url;
+      } else {
+        throw new Error("Payment URL missing in response.");
+      }
+  
     } catch (error) {
-      console.error("Booking Error:", error);
+      console.error("Booking or Payment Error:", error);
       Modal.error({
-        title: "Booking Failed ❌",
-        content: "Something went wrong. Please try again later.",
+        title: "Error ❌",
+        content: error.message || "Something went wrong. Please try again later.",
       });
     }
   };
-
+  
   return (
     <div
       className="relative min-h-screen bg-cover bg-center flex flex-col items-center pt-12"

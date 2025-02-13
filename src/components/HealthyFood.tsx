@@ -173,11 +173,11 @@ const HealthyFood: React.FC = () => {
   return (
     <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
-      <div className="flex justify-between items-center mb-10">
+      <div className="flex justify-between items-center mb-8">
         <h2 className="text-[40px] font-semibold">Healthy Food</h2>
         <Link
           href="/nutritionplan1"
-          className="text-blue-600 text-[18px] hover:underline font-medium"
+          className="text-[#01336F] text-[18px] hover:underline font-medium"
         >
           See all
         </Link>

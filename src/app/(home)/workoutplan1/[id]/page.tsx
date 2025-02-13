@@ -135,18 +135,18 @@ console.log(workoutId,'workoutplan')
                 </thead>
                 <tbody>
                   {workoutPlan.map((day: WorkoutDay) => (
-                    <tr key={day._id} className="border border-gray-300">
+                    <tr key={day._id} className="border border-r border-gray-300">
                       <th className="px-4 py-3 font-semibold text-left text-[#545454] border-r">
                         Day {day.day}
                       </th>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 border border-r border-gray-300">
                         {day.warmUp.exercises.map((exercise) => (
                           <p key={exercise._id} className="text-gray-600">
                             {exercise.exerciseName}
                           </p>
                         ))}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3 border border-r border-gray-300">
                         {day.mainWorkout.exercises.map((exercise) => (
                           <p key={exercise._id} className="text-gray-600">
                             {exercise.exerciseName}
