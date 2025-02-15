@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useUserProfileQuery } from "@/redux/features/userSlice";
 import Link from "next/link";
@@ -54,7 +55,7 @@ const UserProfile: React.FC = () => {
       </div>
 
       {/* Subscribe Button */}
-      <button className="bg-[#01336F] text-white px-6 py-2 rounded-lg mt-4">
+      <button className="bg-[#01336F] text-white px-10 py-2 rounded-lg  mt-4">
         Subscribe Plan
       </button>
 

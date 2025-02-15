@@ -303,6 +303,7 @@ import { useParams } from "next/navigation";
 import { useNutritionDetailsQuery } from "@/redux/features/nutritionSlice";
 import NutritionPlanDetails from "@/pages/NutritionPlan/NutritionPlanDetails";
 import Link from "next/link";
+import Loading from "@/components/Loading";
 
 const onChange: CheckboxProps["onChange"] = (e) => {
   console.log(`checked = ${e.target.checked}`);
@@ -322,7 +323,7 @@ const MealPlans: React.FC = () => {
     console.log("Nutrition Data:", nutrition);
   }, [nutrition]);
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isLoading) return <div className="text-center mt-10"><Loading></Loading></div>;
   if (error)
     return (
       <p className="text-center mt-10 text-red-500">

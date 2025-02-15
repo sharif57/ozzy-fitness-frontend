@@ -81,11 +81,11 @@ const WorkoutPlan: React.FC = () => {
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
+    <div className="px-2 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       <ToastContainer></ToastContainer>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-[40px] font-semibold">Workout Plan</h2>
+        <h2 className="lg:text-[40px] text-2xl font-semibold">Workout Plan</h2>
         <Link
           href="/workoutplan1"
           className="text-[#01336F] text-[18px] hover:underline font-medium"
@@ -113,8 +113,8 @@ const WorkoutPlan: React.FC = () => {
             {/* Content */}
             <div className="p-4 space-y-2">
               <div className="flex justify-between items-center">
-                <h3 className="text-[24px] font-medium">{plan.planName}</h3>
-                <h3 className="text-lg font-semibold text-[#545454]">
+                <h3 className="lg:text-[24px] text-[18px] font-medium">{plan.planName}</h3>
+                <h3 className="lg:text-lg text-sm font-semibold text-[#545454]">
                   {plan.workouts.length > 0
                     ? `Day: ${plan.totalDays}`
                     : "No Workouts"}
@@ -127,13 +127,13 @@ const WorkoutPlan: React.FC = () => {
             <div className="p-4 flex justify-between gap-4">
               <Link
                 href={`/workoutplan1/${plan._id}`}
-                className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
+                className="w-1/2 py-2 lg:text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
               >
                 <button>See Details</button>
               </Link>
               <button
                 onClick={() => handleAddToPlan(plan._id)}
-                className="w-1/2 py-2 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
+                className="w-1/2 py-2 lg:text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
               >
                 Add to Plan
               </button>

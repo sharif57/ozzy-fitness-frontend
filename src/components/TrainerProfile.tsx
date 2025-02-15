@@ -21,8 +21,8 @@ const TrainerProfile: React.FC = () => {
         <div className="w-full max-w-6xl mx-auto ">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-[32px] font-semibold">OZZY GODINEZ</h1>
-              <h2 className="text-gray-500 text-[20px] font-semibold mt-1">
+              <h1 className="lg:text-[32px] font-semibold text-[25px] mt-6 lg:mt-0">OZZY GODINEZ</h1>
+              <h2 className="text-gray-500 lg:text-[20px] font-semibold mt-1">
                 Our Trainer
               </h2>
             </div>
@@ -31,7 +31,7 @@ const TrainerProfile: React.FC = () => {
               <span className="ml-1 text-lg font-semibold">4.9</span>
             </div>
           </div>
-          <div className="space-y-10">
+          <div className="space-y-10 text-start">
             <p className="text-[18px] font-normal text-[#545454] mt-4 leading-relaxed">
               Former division one college football player and experienced elite
               athlete, I bring to OEG Stretching Strength a combination of my

@@ -171,10 +171,10 @@ const HealthyFood: React.FC = () => {
   const nutritionPlans: NutritionPlan[] = data?.data || [];
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
+    <div className="px-2 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-[40px] font-semibold">Healthy Food</h2>
+        <h2 className="lg:text-[40px] text-[24px] font-semibold">Healthy Food</h2>
         <Link
           href="/nutritionplan1"
           className="text-[#01336F] text-[18px] hover:underline font-medium"
@@ -212,7 +212,7 @@ const HealthyFood: React.FC = () => {
               {/* Content */}
               <div className="pt-5 space-y-2">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-[24px] font-medium">{plan.title}</h3>
+                  <h3 className="lg:text-[24px] text-[18px] font-medium">{plan.title}</h3>
                   <span className="text-gray-600 text-[16px] font-normal flex items-center gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

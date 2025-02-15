@@ -7,6 +7,7 @@ import { useUserWorkPlanDetailsQuery } from "@/redux/features/userworkplanSlice"
 import { MessageSquareShare } from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 interface Exercise {
   _id: string;
@@ -99,17 +100,41 @@ const WorkoutDayPage: React.FC = () => {
         setReviewModal(true);
       };
     
-      const handleSubmitReview = async () => {
-        if (selectedExercise) {
-        //   await submitReview({ comment, exerciseId: selectedExercise._id, rating }).unwrap();
-        await submitReview({ comment, exerciseId: selectedExercise._id }).unwrap();
-        console.log(submitReview)
+    //   const handleSubmitReview = async () => {
+    //     if (selectedExercise) {
+    //     //   await submitReview({ comment, exerciseId: selectedExercise._id, rating }).unwrap();
+    //     await submitReview({ comment, exerciseId: selectedExercise._id }).unwrap();
+    //     console.log(submitReview)
 
+    //       setReviewModal(false);
+    //       setComment("");
+    //     //   setRating(5);
+    //     }
+    //   };
+
+    const handleSubmitReview = async () => {
+      if (selectedExercise) {
+        try {
+          // Call the submitReview API
+          const response = await submitReview({ comment, exerciseId: selectedExercise._id }).unwrap();
+    
+          // Check the response and display a success toast
+          if (response.success) {
+            toast.success("Review created successfully!");
+          } else {
+            toast.error("Failed to create review.");
+          }
+    
+          // Reset the modal and form fields
           setReviewModal(false);
           setComment("");
-        //   setRating(5);
+          // setRating(5); // Reset rating if needed
+        } catch (error) {
+          // Handle error case
+          toast.error("An error occurred while submitting the review.");
         }
-      };
+      }
+    };
 
   return (
     <div className="bg-[#FAFAFA]">

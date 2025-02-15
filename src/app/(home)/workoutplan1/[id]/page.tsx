@@ -6,6 +6,7 @@ import WorkoutBanner from "@/pages/WorkoutPlan/WorkoutBanner";
 import { useWorkPlanDetailsQuery } from "@/redux/features/workSlice";
 import { toast, ToastContainer } from "react-toastify";
 import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
+import Loading from "@/components/Loading";
 
 interface Exercise {
   _id: string;
@@ -84,7 +85,7 @@ console.log(workoutId,'workoutplan')
     skip: !workoutId, // Prevent unnecessary API calls when `workoutId` is null
   });
 
-  if (isLoading) return <p>Loading workout plan...</p>;
+  if (isLoading) return <div><Loading></Loading></div>;
   if (error) return <p>Error loading data.</p>;
 
   const workoutPlan = data?.data?.workouts || [];

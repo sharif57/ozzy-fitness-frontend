@@ -1,167 +1,612 @@
-'use client'
-import { useState } from "react";
+// /* eslint-disable @next/next/no-img-element */
+// "use client"
 
-// Define Type for Form Data
+// import { useState } from "react"
+// import Select from "react-select"
+// import countryList from "react-select-country-list"
+// import { ChevronDown } from "lucide-react"
+// import type React from "react" // Added import for React
+// import { useUpdateProfileMutation } from "@/redux/features/userSlice"
+
+// // Types
+// type FormData = {
+//   gender: string
+//   age: number
+//   height: number
+//   weight: number
+//   country: string
+//   fitnessLevel: string
+//   injury: string
+// }
+
+// // Options for dropdowns
+// const genderOptions = [
+//   { value: "male", label: "Male" },
+//   { value: "female", label: "Female" },
+//   { value: "other", label: "Other" },
+// ]
+
+// const heightUnits = [
+//   { value: "cm", label: "cm" },
+//   { value: "ft", label: "ft" },
+// ]
+
+// const weightUnits = [
+//   { value: "kg", label: "kg" },
+//   { value: "lbs", label: "lbs" },
+// ]
+
+// const fitnessLevels = [
+//   { value: "basic", label: "Basic" },
+//   { value: "intermediate", label: "Intermediate" },
+//   { value: "advanced", label: "Advanced" },
+// ]
+
+// const injuryOptions = [
+//   { value: "none", label: "None" },
+//   { value: "lower_back", label: "Lower back" },
+//   { value: "knee", label: "Knee" },
+//   { value: "shoulder", label: "Shoulder" },
+//   { value: "other", label: "Other" },
+// ]
+
+// export default function ProfileForm() {
+//   const [formData, setFormData] = useState<FormData>({
+//     gender: "male",
+//     age: 24,
+//     height: 178,
+//     weight: 78,
+//     country: "ES",
+//     fitnessLevel: "basic",
+//     injury: "lower_back",
+//   })
+
+
+//   const [updateProfile] = useUpdateProfileMutation()
+
+//   const countries = countryList().getData()
+
+//   const customStyles = {
+//     control: (base: any) => ({
+//       ...base,
+//       border: "1px solid #E5E7EB",
+//       borderRadius: "9999px",
+//       padding: "0.5rem",
+//       boxShadow: "none",
+//       "&:hover": {
+//         borderColor: "#345C8C",
+//       },
+//     }),
+//     option: (base: any, state: { isSelected: boolean }) => ({
+//       ...base,
+//       backgroundColor: state.isSelected ? "#345C8C" : "white",
+//       "&:hover": {
+//         backgroundColor: state.isSelected ? "#345C8C" : "#F3F4F6",
+//       },
+//     }),
+//     singleValue: (base: any) => ({
+//       ...base,
+//       display: "flex",
+//       alignItems: "center",
+//       gap: "0.5rem",
+//     }),
+//   }
+
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault()
+//     console.log("Form data:", formData)
+//     // Add your submission logic here
+//   }
+
+//   return (
+//     <div className="min-h-screen flex items-center justify-center bg-[#F0F2F9] p-4">
+//       <div className="w-full max-w-md">
+//         <div className="bg-white rounded-lg p-8 shadow-sm">
+//           <form onSubmit={handleSubmit} className="space-y-6">
+//             {/* Gender */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">Please select your Gender</label>
+//               <Select
+//                 value={genderOptions.find((option) => option.value === formData.gender)}
+//                 onChange={(option) => setFormData((prev) => ({ ...prev, gender: option?.value || "" }))}
+//                 options={genderOptions}
+//                 styles={customStyles}
+//                 components={{
+//                   IndicatorSeparator: () => null,
+//                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                 }}
+//               />
+//             </div>
+
+//             {/* Age */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">What is your age?</label>
+//               <input
+//                 type="number"
+//                 value={formData.age}
+//                 onChange={(e) => setFormData((prev) => ({ ...prev, age: parseInt(e.target.value) }))}
+//                 className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+//                 min="1"
+//                 max="120"
+//               />
+//             </div>
+
+//             {/* Height */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">What is your Height?</label>
+//               <div className="flex gap-4">
+//                 <input
+//                   type="number"
+//                   value={formData.height}
+//                   onChange={(e) => setFormData((prev) => ({ ...prev, height: parseFloat(e.target.value) }))}
+//                   className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+//                 />
+//                 <div className="w-32">
+//                   <Select
+//                     value={heightUnits.find((option) => option.value === formData.heightUnit)}
+//                     onChange={(option) => setFormData((prev) => ({ ...prev, heightUnit: option?.value || "" }))}
+//                     options={heightUnits}
+//                     styles={customStyles}
+//                     components={{
+//                       IndicatorSeparator: () => null,
+//                       DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                     }}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Weight */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">What is your Weight?</label>
+//               <div className="flex gap-4">
+//                 <input
+//                   type="number"
+//                   value={formData.weight}
+//                   onChange={(e) => setFormData((prev) => ({ ...prev, weight: parseFloat(e.target.value) }))}
+//                   className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+//                 />
+//                 <div className="w-32">
+//                   <Select
+//                     value={weightUnits.find((option) => option.value === formData.weightUnit)}
+//                     onChange={(option) => setFormData((prev) => ({ ...prev, weightUnit: option?.value || "" }))}
+//                     options={weightUnits}
+//                     styles={customStyles}
+//                     components={{
+//                       IndicatorSeparator: () => null,
+//                       DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                     }}
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Country */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">Which country are you from?</label>
+//               <Select
+//                 value={countries.find((option) => option.value === formData.country)}
+//                 onChange={(option) => setFormData((prev) => ({ ...prev, country: option?.value || "" }))}
+//                 options={countries}
+//                 styles={customStyles}
+//                 components={{
+//                   IndicatorSeparator: () => null,
+//                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                 }}
+//                 formatOptionLabel={({ label, value }: any) => (
+//                   <div className="flex items-center gap-2">
+//                     <img
+//                       loading="lazy"
+//                       width="20"
+//                       src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}
+//                       srcSet={`https://flagcdn.com/w40/${value.toLowerCase()}.png 2x`}
+//                       alt=""
+//                     />
+//                     {label}
+//                   </div>
+//                 )}
+//               />
+//             </div>
+
+//             {/* Fitness Level */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">Fitness Level ?</label>
+//               <Select
+//                 value={fitnessLevels.find((option) => option.value === formData.fitnessLevel)}
+//                 onChange={(option) => setFormData((prev) => ({ ...prev, fitnessLevel: option?.value || "" }))}
+//                 options={fitnessLevels}
+//                 styles={customStyles}
+//                 components={{
+//                   IndicatorSeparator: () => null,
+//                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                 }}
+//               />
+//             </div>
+
+//             {/* injury */}
+//             <div className="space-y-2">
+//               <label className="block text-sm font-medium text-gray-700">Any injury</label>
+//               <Select
+//                 value={injuryOptions.find((option) => option.value === formData.injury)}
+//                 onChange={(option) => setFormData((prev) => ({ ...prev, injury: option?.value || "" }))}
+//                 options={injuryOptions}
+//                 styles={customStyles}
+//                 components={{
+//                   IndicatorSeparator: () => null,
+//                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+//                 }}
+//               />
+//             </div>
+
+//             <button
+//               type="submit"
+//               className="w-full bg-[#345C8C] text-white py-4 rounded-full hover:bg-[#284670] transition-colors font-semibold"
+//             >
+//               Submit
+//             </button>
+//           </form>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+
+/* eslint-disable @next/next/no-img-element */
+"use client"
+
+import { useState } from "react"
+import Select from "react-select"
+import countryList from "react-select-country-list"
+import { ChevronDown } from "lucide-react"
+import type React from "react"
+import { useUpdateProfileMutation } from "@/redux/features/userSlice"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
+
+// Types
 type FormData = {
-  gender: string;
-  age: string;
-  height: string;
-  heightUnit: "cm" | "ft";
-  weight: string;
-  weightUnit: "kg" | "lbs";
-  country: string;
-  fitnessLevel: "Basic" | "Intermediate" | "Advanced";
-  injuries: "Lower back" | "Knee pain" | "Shoulder pain" | "None";
-};
+  gender: string
+  age: number
+  height: number
+  weight: number
+  country: string
+  fitnessLevel: string
+  injury: string
+}
 
-const FitnessForm = () => {
-  // State with Type
+// Options for dropdowns
+const genderOptions = [
+  { value: "MALE", label: "Male" },
+  { value: "FEMALE", label: "Female" },
+  { value: "OTHER", label: "Other" },
+]
+
+const heightUnits = [
+  { value: "cm", label: "cm" },
+  { value: "ft", label: "ft" },
+]
+
+const weightUnits = [
+  { value: "kg", label: "kg" },
+  { value: "lbs", label: "lbs" },
+]
+
+const fitnessLevels = [
+  { value: "BASIC", label: "Basic" },
+  { value: "INTERMEDIATE", label: "Intermediate" },
+  { value: "ADVANCED", label: "Advanced" },
+]
+
+const injuryOptions = [
+  { value: "NONE", label: "None" },
+  { value: "LOWER_BACK", label: "Lower back" },
+  { value: "KNEE", label: "Knee" },
+  { value: "SHOULDER", label: "Shoulder" },
+  { value: "OTHER", label: "Other" },
+]
+
+export default function ProfileForm() {
   const [formData, setFormData] = useState<FormData>({
-    gender: "Male",
-    age: "",
-    height: "",
-    heightUnit: "cm",
-    weight: "",
-    weightUnit: "kg",
-    country: "Spain",
-    fitnessLevel: "Basic",
-    injuries: "Lower back",
-  });
+    gender: "MALE",
+    age: 24,
+    height: 178,
+    weight: 78,
+    country: "ES",
+    fitnessLevel: "BASIC",
+    injury: "NONE",
+  })
 
-  // Input & Select Change Handler
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value as string });
-  };
+  const [errors, setErrors] = useState<Partial<FormData>>({}) // State for validation errors
+  const router = useRouter()
+  const [updateProfile] = useUpdateProfileMutation()
 
-  // Form Submit Handler
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Submitted Data:", formData);
-  };
+  const countries = countryList().getData()
+
+  const customStyles = {
+    control: (base: any) => ({
+      ...base,
+      border: "1px solid #E5E7EB",
+      borderRadius: "9999px",
+      padding: "0.5rem",
+      boxShadow: "none",
+      "&:hover": {
+        borderColor: "#345C8C",
+      },
+    }),
+    option: (base: any, state: { isSelected: boolean }) => ({
+      ...base,
+      backgroundColor: state.isSelected ? "#345C8C" : "white",
+      "&:hover": {
+        backgroundColor: state.isSelected ? "#345C8C" : "#F3F4F6",
+      },
+    }),
+    singleValue: (base: any) => ({
+      ...base,
+      display: "flex",
+      alignItems: "center",
+      gap: "0.5rem",
+    }),
+  }
+
+  // Validate form fields
+  const validateForm = () => {
+    const newErrors: Partial<FormData> = {}
+
+    if (!formData.gender) newErrors.gender = "Gender is required"
+    if (!formData.age || formData.age < 1 || formData.age > 120) newErrors.age = "Age must be between 1 and 120"
+    if (!formData.height || formData.height <= 0) newErrors.height = "Height must be a positive number"
+    if (!formData.weight || formData.weight <= 0) newErrors.weight = "Weight must be a positive number"
+    if (!formData.country) newErrors.country = "Country is required"
+    if (!formData.fitnessLevel) newErrors.fitnessLevel = "Fitness level is required"
+    if (!formData.injury) newErrors.injury = "Injury field is required"
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0 // Return true if no errors
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Validate form before submission
+    if (!validateForm()) {
+      toast.error("Please fill out all required fields correctly.", {
+        position: "top-right",
+        autoClose: 3000,
+      })
+      return
+    }
+
+    // Create a new FormData object
+    const formDataObj = new FormData()
+
+    // Convert formData to JSON and append it to FormData
+    const jsonData = JSON.stringify({
+      gender: formData.gender,
+      age: formData.age,
+      height: formData.height,
+      weight: formData.weight,
+      country: formData.country,
+      fitnessLevel: formData.fitnessLevel,
+      injury: formData.injury,
+    })
+    formDataObj.append("data", jsonData)
+
+    // Log the FormData entries for debugging
+    console.log("Sending formData:", [...formDataObj.entries()])
+
+    try {
+      // Call the updateProfile mutation with FormData
+      const response = await updateProfile(formDataObj).unwrap()
+      console.log("Update response:", response)
+
+      router.push("/")
+      // Show success toast notification
+      toast.success(response.message || "Profile updated successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      })
+    } catch (error) {
+      console.error("Failed to update profile:", error)
+
+      // Show error toast notification
+      toast.error("Failed to update profile. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      })
+    }
+  }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Gender */}
-          <label className="block text-gray-700">Please select your Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+    <div className="min-h-screen flex items-center justify-center bg-[#F0F2F9] p-4">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-lg p-8 shadow-sm">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Gender */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Please select your Gender</label>
+              <Select
+                value={genderOptions.find((option) => option.value === formData.gender)}
+                onChange={(option) => setFormData((prev) => ({ ...prev, gender: option?.value || "MALE" }))}
+                options={genderOptions}
+                styles={customStyles}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                }}
+              />
+              {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
+            </div>
 
-          {/* Age */}
-          <label className="block text-gray-700">What is your age?</label>
-          <input
-            type="number"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            placeholder="Enter your age"
-            className="w-full p-2 border rounded-lg"
-          />
+            {/* Age */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">What is your age?</label>
+              <input
+                type="number"
+                value={formData.age}
+                onChange={(e) => setFormData((prev) => ({ ...prev, age: parseInt(e.target.value) }))}
+                className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+                min="1"
+                max="120"
+                required
+              />
+              {errors.age && <p className="text-red-500 text-sm">{errors.age}</p>}
+            </div>
 
-          {/* Height */}
-          <label className="block text-gray-700">What is your Height?</label>
-          <div className="flex space-x-2">
-            <input
-              type="number"
-              name="height"
-              value={formData.height}
-              onChange={handleChange}
-              placeholder="Height"
-              className="w-full p-2 border rounded-lg"
-            />
-            <select
-              name="heightUnit"
-              value={formData.heightUnit}
-              onChange={handleChange}
-              className="p-2 border rounded-lg"
+            {/* Height */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">What is your Height?</label>
+              <div className="flex gap-4">
+                <input
+                  type="number"
+                  value={formData.height}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, height: parseFloat(e.target.value) }))}
+                  className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+                  required
+                />
+                <div className="w-32">
+                  <Select
+                    value={heightUnits.find((option) => option.value === formData.heightUnit)}
+                    onChange={(option) => setFormData((prev) => ({ ...prev, heightUnit: option?.value || "cm" }))}
+                    options={heightUnits}
+                    styles={customStyles}
+                    components={{
+                      IndicatorSeparator: () => null,
+                      DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                    }}
+                  />
+                </div>
+              </div>
+              {errors.height && <p className="text-red-500 text-sm">{errors.height}</p>}
+            </div>
+
+            {/* Weight */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">What is your Weight?</label>
+              <div className="flex gap-4">
+                <input
+                  type="number"
+                  value={formData.weight}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, weight: parseFloat(e.target.value) }))}
+                  className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
+                  required
+                />
+                <div className="w-32">
+                  <Select
+                    value={weightUnits.find((option) => option.value === formData.weightUnit)}
+                    onChange={(option) => setFormData((prev) => ({ ...prev, weightUnit: option?.value || "kg" }))}
+                    options={weightUnits}
+                    styles={customStyles}
+                    components={{
+                      IndicatorSeparator: () => null,
+                      DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                    }}
+                  />
+                </div>
+              </div>
+              {errors.weight && <p className="text-red-500 text-sm">{errors.weight}</p>}
+            </div>
+
+            {/* Country */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Which country are you from?</label>
+              <Select
+                value={countries.find((option) => option.value === formData.country)}
+                onChange={(option) => setFormData((prev) => ({ ...prev, country: option?.value || "ES" }))}
+                options={countries}
+                styles={customStyles}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                }}
+                formatOptionLabel={({ label, value }: any) => (
+                  <div className="flex items-center gap-2">
+                    <img
+                      loading="lazy"
+                      width="20"
+                      src={`https://flagcdn.com/w20/${value.toLowerCase()}.png`}
+                      srcSet={`https://flagcdn.com/w40/${value.toLowerCase()}.png 2x`}
+                      alt=""
+                    />
+                    {label}
+                  </div>
+                )}
+              />
+              {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
+            </div>
+
+            {/* Fitness Level */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Fitness Level ?</label>
+              <Select
+                value={fitnessLevels.find((option) => option.value === formData.fitnessLevel)}
+                onChange={(option) => setFormData((prev) => ({ ...prev, fitnessLevel: option?.value || "BASIC" }))}
+                options={fitnessLevels}
+                styles={customStyles}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                }}
+              />
+              {errors.fitnessLevel && <p className="text-red-500 text-sm">{errors.fitnessLevel}</p>}
+            </div>
+
+            {/* Injury */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Any injury</label>
+              <Select
+                value={injuryOptions.find((option) => option.value === formData.injury)}
+                onChange={(option) => setFormData((prev) => ({ ...prev, injury: option?.value || "NONE" }))}
+                options={injuryOptions}
+                styles={customStyles}
+                components={{
+                  IndicatorSeparator: () => null,
+                  DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
+                }}
+              />
+              {errors.injury && <p className="text-red-500 text-sm">{errors.injury}</p>}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#345C8C] text-white py-4 rounded-full hover:bg-[#284670] transition-colors font-semibold"
             >
-              <option value="cm">cm</option>
-              <option value="ft">ft</option>
-            </select>
-          </div>
-
-          {/* Weight */}
-          <label className="block text-gray-700">What is your Weight?</label>
-          <div className="flex space-x-2">
-            <input
-              type="number"
-              name="weight"
-              value={formData.weight}
-              onChange={handleChange}
-              placeholder="Weight"
-              className="w-full p-2 border rounded-lg"
-            />
-            <select
-              name="weightUnit"
-              value={formData.weightUnit}
-              onChange={handleChange}
-              className="p-2 border rounded-lg"
-            >
-              <option value="kg">kg</option>
-              <option value="lbs">lbs</option>
-            </select>
-          </div>
-
-          {/* Country */}
-          <label className="block text-gray-700">Which country are you from?</label>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          >
-            <option value="Spain">Spain</option>
-            <option value="USA">USA</option>
-            <option value="UK">UK</option>
-            <option value="Canada">Canada</option>
-          </select>
-
-          {/* Fitness Level */}
-          <label className="block text-gray-700">Fitness Level?</label>
-          <select
-            name="fitnessLevel"
-            value={formData.fitnessLevel}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          >
-            <option value="Basic">Basic</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-
-          {/* Injuries */}
-          <label className="block text-gray-700">Any injuries</label>
-          <select
-            name="injuries"
-            value={formData.injuries}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          >
-            <option value="Lower back">Lower back</option>
-            <option value="Knee pain">Knee pain</option>
-            <option value="Shoulder pain">Shoulder pain</option>
-            <option value="None">None</option>
-          </select>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            Submit
-          </button>
-        </form>
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
+// "use client"
 
-export default FitnessForm;
+// import type React from "react"
+// import { CheckCircle } from "lucide-react"
+// import Link from "next/link"
+
+// const SimplePaymentSuccess: React.FC = () => {
+//   return (
+//     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 animate-">
+//       <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden animate-fade-in-up">
+//         <div className="bg-green-500 text-white p-8 flex flex-col items-center justify-center">
+//           <CheckCircle size={64} className="mb-4 animate-bounce" />
+//           <h1 className="text-3xl font-bold text-center">Payment Successful!</h1>
+//         </div>
+//         <div className="p-6 text-center">
+//           <p className="text-xl text-gray-700 mb-6">
+//             Thank you for your purchase. Your transaction has been completed successfully.
+//           </p>
+//           <Link
+//             href="/"
+//             className="inline-block w-full bg-[#345C8C] text-white text-center py-3 px-6 rounded-lg hover:bg-[#345C8C] transition duration-300 ease-in-out transform hover:scale-105"
+//           >
+//             Continue Shopping
+//           </Link>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default SimplePaymentSuccess

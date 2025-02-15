@@ -51,7 +51,7 @@ export default function WorkPlan() {
   console.log(workPlans)
 
   return (
-    <div className="lg:p-6 p-3 container mx-auto">
+    <div className="lg:p-6 p-3 container mx-auto h-auto">
       <h2 className="lg:text-[48px] text-[30px] font-semibold text-center mb-6">
         My Workout Plan
       </h2>

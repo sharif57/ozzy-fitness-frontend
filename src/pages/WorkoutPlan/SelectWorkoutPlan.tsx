@@ -217,13 +217,13 @@ const SelectWorkoutPlan: React.FC = () => {
             <div className="p-4 flex justify-between gap-4">
               <Link
                 href={`/workoutplan1/${plan._id}`}
-                className="w-1/2 py-2 text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
+                className="w-1/2 py-2 lg:text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
               >
                 <button>See Details</button>
               </Link>
               <button
                 onClick={() => handleAddToPlan(plan._id)}
-                className="w-1/2 py-2 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
+                className="w-1/2 py-2 lg:text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
               >
                 Add to Plan
               </button>

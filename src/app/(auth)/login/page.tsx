@@ -27,16 +27,65 @@ export default function Login() {
     password: "",
   })
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+
+  //   try {
+  //     const response = await login({
+  //       email: formData.email,
+  //       password: formData.password,
+  //     }).unwrap()
+
+  //     console.log(response)
+
+  //     if (response.success) {
+  //       localStorage.setItem("accessToken", response.data.accessToken)
+  //       Cookies.set("accessToken", response.data.accessToken, {
+  //         expires: 1,
+  //         path: "/",
+  //         sameSite: "Strict",
+  //         secure: true,
+  //       })
+  //       localStorage.setItem("refreshToken", response.data.refreshToken)
+  //       localStorage.setItem("user", JSON.stringify(response.data.user))
+
+      
+
+  //       toast.success("Login Successful!", {
+  //         autoClose: 1500,
+  //       })
+
+  //       setTimeout(() => {
+  //         router.push("/details")
+  //       })
+  //     } else {
+  //       toast.error(response.message || "Invalid credentials!")
+  //     }
+  //   } catch (error: unknown) {
+  //     console.error("Login error:", error)
+  //     if (error && typeof error === 'object' && 'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data) {
+  //       toast.error((error.data as { message: string }).message || "Something went wrong. Try again!")
+  //     } else {
+  //       toast.error("Something went wrong. Try again!")
+  //     }
+  //   }
+  // }
+
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+  
     try {
       const response = await login({
         email: formData.email,
         password: formData.password,
       }).unwrap()
-
+  
+      console.log(response)
+  
       if (response.success) {
+        // Save tokens and user data to localStorage and cookies
         localStorage.setItem("accessToken", response.data.accessToken)
         Cookies.set("accessToken", response.data.accessToken, {
           expires: 1,
@@ -46,20 +95,37 @@ export default function Login() {
         })
         localStorage.setItem("refreshToken", response.data.refreshToken)
         localStorage.setItem("user", JSON.stringify(response.data.user))
-
+  
+        // Show success toast notification
         toast.success("Login Successful!", {
           autoClose: 1500,
         })
-
-        setTimeout(() => {
-          router.push("/")
-        })
+  
+        // Check if the user has a gender field
+        if (!response?.data?.user?.gender) {
+          // Redirect to the details page if gender is missing
+          setTimeout(() => {
+            router.push("/details")
+          }, 1500) // Redirect after 1.5 seconds
+        } else {
+          // Redirect to the home page if gender is present
+          setTimeout(() => {
+            router.push("/")
+          }, 1500) // Redirect after 1.5 seconds
+        }
       } else {
         toast.error(response.message || "Invalid credentials!")
       }
     } catch (error: unknown) {
       console.error("Login error:", error)
-      if (error && typeof error === 'object' && 'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "data" in error &&
+        typeof error.data === "object" &&
+        error.data &&
+        "message" in error.data
+      ) {
         toast.error((error.data as { message: string }).message || "Something went wrong. Try again!")
       } else {
         toast.error("Something went wrong. Try again!")

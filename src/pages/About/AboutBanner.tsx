@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AboutBanner() {
   return (
-    <div className="bg-[#F6F6F6] py-8">
+    <div className="bg-[#F6F6F6] ">
       <div>
         <div className="relative h-[20vh] md:h-[70vh] lg:h-[calc(80vh-100px)] xl:h-[calc(100vh-600px)] w-full flex items-center justify-center">
           {/* Background Image with Opacity */}
@@ -45,14 +45,14 @@ export default function AboutBanner() {
 
           {/* Right Text Content */}
           <div className="space-y-8 mt-12">
-            <h2 className="lg:text-[32px] text-3xl font-medium">We believe in doing</h2>
-            <p className="text-gray-600 text-[18px] font-normal mt-3">
+            <h2 className="lg:text-[32px] text-[24px] font-medium">We believe in doing</h2>
+            <p className="text-gray-600 lg:text-[18px] font-normal mt-3">
             OEG FITNESS  is a balanced fitness program that combines gym, nutrition, stretching and therapy suited to fit an average person looking to start/or start over, as well as all levels of athletes. This includes younger athletes, pro athletes, former athletes, weekend warriors and master athletes.
             </p>
-            <p className="text-gray-600 text-[18px] font-normal mt-3">
+            <p className="text-gray-600 lg:text-[18px] font-normal mt-3">
             OEG Stretching Strength has proven success in helping clients achieve weight loss or muscle gain and assist those in recovery or coping with existing chronic pain due to surgery. This program has also helped those with certain disabilities/diseases such as MS & neuropathy.
             </p>
-            <p className="text-gray-600 text-[18px] font-normal mt-3">
+            <p className="text-gray-600 lg:text-[18px] font-normal mt-3">
             This system is for anyone looking to make health, wellness and nutrition a priority in their life at any age or physical ability, and to achieve the highest level of quality of life.
             </p>
 

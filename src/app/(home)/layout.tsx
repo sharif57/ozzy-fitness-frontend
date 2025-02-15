@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider store={store}>
-        <Navbar></Navbar>
-        <AntdRegistry>{children}</AntdRegistry>
-        <Footer></Footer>
+          <Navbar></Navbar>
+          <AntdRegistry>{children}</AntdRegistry>
+          <Footer></Footer>
+          <ToastContainer  position="top-center" autoClose={1000}/>
         </Provider>
         
       </body>

@@ -158,10 +158,10 @@ const Appointment: React.FC = () => {
             />
             <div className="mt-4">
               <div className="flex justify-between items-center">
-                <h2 className="text-[24px] font-medium">
+                <h2 className="lg:text-[24px] text-[20px] font-medium">
                   {consultation.title}
                 </h2>
-                <p className="text-[#01336F] font-bold text-[32px]">
+                <p className="text-[#01336F] font-bold lg:text-[32px] text-[20px]">
                   ${consultation.price}
                 </p>
               </div>

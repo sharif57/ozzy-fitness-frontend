@@ -49,7 +49,7 @@ export default function Navbar() {
     { key: "3", label: <Link href="/myappointment">My Appointment</Link> },
     { key: "4", label: <Link href="/myworkoutplan">My Workout Plan</Link> },
     { type: "divider" },
-    { key: "5", label: <button onClick={handleLogOut}>Logout</button> },
+    { key: "5", label: <button className="text-[#BF0C0A]  font-normal " onClick={handleLogOut}>Logout</button> },
   ];
 
   const menuItems = [
@@ -147,7 +147,7 @@ export default function Navbar() {
         }`}
       >
         <div className="flex justify-between bg-white items-center px-4 py-3 border-b">
-          <img src="/images/mobileLogo.png" alt="Logo" />
+          <img src="/images/logo.png" alt="Logo" className="h-[30px]" />
           <button
             onClick={() => setOpen(false)}
             className="text-black border-2 p-2 rounded-lg"
