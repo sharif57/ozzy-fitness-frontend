@@ -1,11 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 
-
-
 "use client";
 
 import { useState, useEffect } from "react";
-import {  Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { PiCameraPlus } from "react-icons/pi";
 import {
   useUpdateProfileMutation,
@@ -30,7 +28,7 @@ const EditMyProfile = () => {
     data: user,
     isLoading,
     error,
-  } = useUserProfileQuery<{ data: UserProfileData }>();
+  } = useUserProfileQuery<{ data: UserProfileData }>();                        
 
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
   const [form] = Form.useForm();
@@ -129,10 +127,16 @@ const EditMyProfile = () => {
                 <PiCameraPlus size={34} />
               </div>
               <img
-                src={profileImage || "https://cdn-icons-png.flaticon.com/128/236/236831.png"}
+                src={
+                  profileImage ||
+                  "https://cdn-icons-png.flaticon.com/128/236/236831.png"
+                }
                 alt="Profile"
                 className="h-full w-full object-cover rounded-full"
-                onError={(e) => (e.currentTarget.src = "https://cdn-icons-png.flaticon.com/128/236/236831.png")}
+                onError={(e) =>
+                  (e.currentTarget.src =
+                    "https://cdn-icons-png.flaticon.com/128/236/236831.png")
+                }
               />
             </div>
             <input
@@ -146,20 +150,30 @@ const EditMyProfile = () => {
         </div>
 
         {/* Profile Details Form */}
-        <div className="flex flex-col space-y-4 w-full">
+        <div className="flex flex-col space-y-4 w-full ">
           <Form.Item
-            label="Name"
+            label={<span className="text-[#000000]">Name</span>}
             name="name"
             rules={[{ required: true, message: "Please enter your name!" }]}
           >
             <Input size="large" className="py-2 rounded-lg bg-[#EFFAFF]" />
           </Form.Item>
 
-          <Form.Item label="Email" name="email">
-            <Input readOnly size="large" className="py-2 rounded-lg bg-[#EFFAFF]" />
+          <Form.Item
+            label={<span className="text-[#000000]">Email</span>}
+            name="email"
+          >
+            <Input
+              readOnly
+              size="large"
+              className="py-2 rounded-lg bg-[#EFFAFF]"
+            />
           </Form.Item>
 
-          <Form.Item label="Phone Number" name="phone">
+          <Form.Item
+            label={<span className="text-[#000000]">Phone Number</span>}
+            name="phone"
+          >
             <Input
               size="large"
               value={phoneNumber}
@@ -182,4 +196,4 @@ const EditMyProfile = () => {
   );
 };
 
-export default EditMyProfile
+export default EditMyProfile;

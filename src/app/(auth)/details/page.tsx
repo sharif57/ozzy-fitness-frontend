@@ -317,8 +317,8 @@ export default function ProfileForm() {
     injury: "NONE",
   })
 
-  const [errors, setErrors] = useState<Partial<FormData>>({}) // State for validation errors
-  const router = useRouter()
+  const router =  useRouter()
+
   const [updateProfile] = useUpdateProfileMutation()
 
   const countries = countryList().getData()
@@ -349,33 +349,8 @@ export default function ProfileForm() {
     }),
   }
 
-  // Validate form fields
-  const validateForm = () => {
-    const newErrors: Partial<FormData> = {}
-
-    if (!formData.gender) newErrors.gender = "Gender is required"
-    if (!formData.age || formData.age < 1 || formData.age > 120) newErrors.age = "Age must be between 1 and 120"
-    if (!formData.height || formData.height <= 0) newErrors.height = "Height must be a positive number"
-    if (!formData.weight || formData.weight <= 0) newErrors.weight = "Weight must be a positive number"
-    if (!formData.country) newErrors.country = "Country is required"
-    if (!formData.fitnessLevel) newErrors.fitnessLevel = "Fitness level is required"
-    if (!formData.injury) newErrors.injury = "Injury field is required"
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0 // Return true if no errors
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    // Validate form before submission
-    if (!validateForm()) {
-      toast.error("Please fill out all required fields correctly.", {
-        position: "top-right",
-        autoClose: 3000,
-      })
-      return
-    }
 
     // Create a new FormData object
     const formDataObj = new FormData()
@@ -392,6 +367,8 @@ export default function ProfileForm() {
     })
     formDataObj.append("data", jsonData)
 
+
+
     // Log the FormData entries for debugging
     console.log("Sending formData:", [...formDataObj.entries()])
 
@@ -400,7 +377,7 @@ export default function ProfileForm() {
       const response = await updateProfile(formDataObj).unwrap()
       console.log("Update response:", response)
 
-      router.push("/")
+      router.push('/')
       // Show success toast notification
       toast.success(response.message || "Profile updated successfully!", {
         position: "top-right",
@@ -416,6 +393,8 @@ export default function ProfileForm() {
       })
     }
   }
+
+ 
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F0F2F9] p-4">
@@ -435,7 +414,6 @@ export default function ProfileForm() {
                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
                 }}
               />
-              {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
             </div>
 
             {/* Age */}
@@ -448,9 +426,7 @@ export default function ProfileForm() {
                 className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
                 min="1"
                 max="120"
-                required
               />
-              {errors.age && <p className="text-red-500 text-sm">{errors.age}</p>}
             </div>
 
             {/* Height */}
@@ -462,7 +438,6 @@ export default function ProfileForm() {
                   value={formData.height}
                   onChange={(e) => setFormData((prev) => ({ ...prev, height: parseFloat(e.target.value) }))}
                   className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
-                  required
                 />
                 <div className="w-32">
                   <Select
@@ -477,7 +452,6 @@ export default function ProfileForm() {
                   />
                 </div>
               </div>
-              {errors.height && <p className="text-red-500 text-sm">{errors.height}</p>}
             </div>
 
             {/* Weight */}
@@ -489,7 +463,6 @@ export default function ProfileForm() {
                   value={formData.weight}
                   onChange={(e) => setFormData((prev) => ({ ...prev, weight: parseFloat(e.target.value) }))}
                   className="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-[#345C8C]"
-                  required
                 />
                 <div className="w-32">
                   <Select
@@ -504,7 +477,6 @@ export default function ProfileForm() {
                   />
                 </div>
               </div>
-              {errors.weight && <p className="text-red-500 text-sm">{errors.weight}</p>}
             </div>
 
             {/* Country */}
@@ -532,7 +504,6 @@ export default function ProfileForm() {
                   </div>
                 )}
               />
-              {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
             </div>
 
             {/* Fitness Level */}
@@ -548,7 +519,6 @@ export default function ProfileForm() {
                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
                 }}
               />
-              {errors.fitnessLevel && <p className="text-red-500 text-sm">{errors.fitnessLevel}</p>}
             </div>
 
             {/* Injury */}
@@ -564,8 +534,9 @@ export default function ProfileForm() {
                   DropdownIndicator: () => <ChevronDown className="h-4 w-4 text-gray-400" />,
                 }}
               />
-              {errors.injury && <p className="text-red-500 text-sm">{errors.injury}</p>}
             </div>
+
+          
 
             <button
               type="submit"
@@ -579,6 +550,7 @@ export default function ProfileForm() {
     </div>
   )
 }
+
 // "use client"
 
 // import type React from "react"

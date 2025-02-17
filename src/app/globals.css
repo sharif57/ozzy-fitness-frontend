@@ -104,3 +104,26 @@ color: white !important;
   padding-bottom: 12px !important;
 }
 
+/* .ant-modal-content {
+  padding: 0 !important;
+  background: red !important;
+}
+
+.ant-modal-header {
+  margin: 0 !important;
+  padding: 16px 24px !important;
+  border-bottom: 1px solid #f0f0f0;
+} */
+
+
+/* .css-dev-only-do-not-override-cdzvx5.ant-modal-root .ant-modal-centered .ant-modal {
+  top: 0;
+  display: inline-block;
+  padding-bottom: 0;
+  text-align: start;
+  vertical-align: middle;   
+   position: absolute;
+  right: 0;
+  transform: translateX(50%);
+} */
+
