@@ -127,3 +127,13 @@ color: white !important;
   transform: translateX(50%);
 } */
 
+
+
+::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Hides scrollbar for Internet Explorer */
+   scrollbar-width: none;     
+}

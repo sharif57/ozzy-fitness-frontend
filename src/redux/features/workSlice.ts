@@ -27,9 +27,35 @@ export const workApi = baseApi.injectEndpoints({
         }),
         providesTags: ["Work"], // Marks the fetched data with the "Question" tag
       }),
-  
+
+
+      
+    allExercise: builder.query({
+      query: () => ({
+        url: "/exercise/all",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }),
+      providesTags: ["Work"],
+    }),
+
+
+    createWorkPlan: builder.mutation({
+      query: (create) => ({
+        url: "workout-plan/create-workout-plan",
+        method: "POST",
+        body: create,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          // "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["Work"]
+    }),
 
   }),
 });
 
-export const {  useAllWorkPlanQuery, useWorkPlanDetailsQuery} = workApi;
+export const {  useAllWorkPlanQuery, useWorkPlanDetailsQuery, useAllExerciseQuery, useCreateWorkPlanMutation } = workApi;

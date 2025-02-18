@@ -1,6 +1,11 @@
+'use client'
+import { useAllExerciseQuery } from "@/redux/features/workSlice";
 import React from "react";
 
 export default function WorkoutBanner() {
+  const {data} = useAllExerciseQuery(undefined)
+  console.log(data?.data, 'work')
+
   return (
     <div>
       {" "}

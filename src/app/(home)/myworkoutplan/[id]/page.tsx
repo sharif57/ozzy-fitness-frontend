@@ -76,6 +76,7 @@ const WorkoutDayPage: React.FC = () => {
 
   // Extract exercises from warm-up, main workout, and cool-down
   const warmUpExercises = workoutDay?.warmUp?.exercises || [];
+  console.log(warmUpExercises)
   const mainWorkoutExercises = workoutDay?.mainWorkout?.exercises || [];
   const coolDownExercises = workoutDay?.coolDown?.exercises || [];
 

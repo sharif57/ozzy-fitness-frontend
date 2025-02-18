@@ -4,7 +4,7 @@
 
 import { ArrowUp, Sparkles, Star } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { Checkbox, Progress, Modal, Flex, Input, Button } from "antd";
+import { Checkbox, Progress, Modal, Flex } from "antd";
 import type { CheckboxProps } from "antd";
 import Appointment from "@/components/Appointment";
 import { IoMdShareAlt } from "react-icons/io";
@@ -13,12 +13,7 @@ import { useNutritionDetailsQuery } from "@/redux/features/nutritionSlice";
 import NutritionPlanDetails from "@/pages/NutritionPlan/NutritionPlanDetails";
 import Link from "next/link";
 import Loading from "@/components/Loading";
-import {
-  CloseOutlined,
-  ExpandAltOutlined,
-  ArrowUpOutlined,
-} from "@ant-design/icons";
-
+import { useUserProfileQuery } from "@/redux/features/userSlice";
 const onChange: CheckboxProps["onChange"] = (e) => {
   console.log(`checked = ${e.target.checked}`);
 };
@@ -32,6 +27,11 @@ const MealPlans: React.FC = () => {
 
   const { data, isLoading, error } = useNutritionDetailsQuery(id);
   const nutrition = data?.data?.nutrition;
+
+  const {data:userData} = useUserProfileQuery()
+  console.log(
+    " here data",userData?.data)
+  
 
   const [openModal, setOpenModal] = useState(false);
   const [messages, setMessages] = useState([
@@ -61,7 +61,7 @@ const MealPlans: React.FC = () => {
             messages: [
               {
                 role: "system",
-                content: `You are a nutritionist. Answer queries related to ${nutrition?.title}.`,
+                content: `You are a nutritionist. Answer queries related to ${nutrition?.title} ${userData?.data?.age} ${userData?.data?.gender}  ${userData?.data?.height} ${userData?.data?.weight}.`,
               },
               { role: "user", content: message },
             ],

@@ -229,7 +229,7 @@ const HealthyFood: React.FC = () => {
                     {plan.rating}
                   </span>
                 </div>
-                <p className="text-gray-500 text-sm">{plan.instruction}</p>
+                <p className="text-gray-500 text-[16px] font-normal">{plan.instruction}</p>
               </div>
 
               {/* Buttons */}

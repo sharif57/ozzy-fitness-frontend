@@ -33,15 +33,17 @@
 import baseApi from "../api/baseApi";
 
 interface ProfileData {
+ data:{
   name: string;
   email: string;
   phone: string;
   role: string;
   image: string;
   payment: boolean;
-  subscribtion: boolean;
+  subscription: boolean;
   isDeleted: boolean;
   verified: boolean;
+ }
 }
 
 
