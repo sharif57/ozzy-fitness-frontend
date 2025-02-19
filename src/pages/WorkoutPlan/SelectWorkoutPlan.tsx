@@ -96,6 +96,7 @@
 // export default SelectWorkoutPlan;
 
 "use client";
+import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
 import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
 import { useAllWorkPlanQuery } from "@/redux/features/workSlice";
 import Link from "next/link";
@@ -171,10 +172,15 @@ const SelectWorkoutPlan: React.FC = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  // if (isLoading) return <p className="text-center">Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (
+    <>
+     
+    {isLoading ? (
+        <CardAllSkeleton/>
+      ) : 
     <div className="lg:px-6 md:px-12  py-10 mx-auto max-w-[1580px]">
       <ToastContainer></ToastContainer>
       {/* Header */}
@@ -232,9 +238,11 @@ const SelectWorkoutPlan: React.FC = () => {
         ))}
       </div>
     </div>
-  );
-};
-
+ }
+ </>
+   );
+ };
+ 
 export default SelectWorkoutPlan;
 
 /* eslint-disable @next/next/no-img-element */

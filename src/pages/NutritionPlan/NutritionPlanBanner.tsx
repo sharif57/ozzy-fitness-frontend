@@ -21,24 +21,9 @@ export default function NutritionBanner() {
               className="text-white lg:text-[48px] text-[30px] w-4/5
  font-bold  mx-auto"
             >
-              Create your Nutrition Plan
+              Explore Nutrition Plan
             </h1>
-            <div className="flex items-center  w-5/6 mx-auto bg-white/10 backdrop-blur-lg rounded-lg px- ">
-              {/* Icon */}
-              <span className="text-white/70 text-lg pl-4">✨</span>
-
-              {/* Input Field */}
-              <input
-                type="text"
-                placeholder="Enter your prompt.."
-                className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2 lg:py-6 py-4"
-              />
-
-              {/* Submit Button */}
-              <button className="bg-[#01336F] text-white lg:px-8 px-4 lg:py-6 py-4 rounded-r-lg">
-                Enter
-              </button>
-            </div>
+         
           </div>
         </div>
       </div>

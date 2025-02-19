@@ -323,6 +323,7 @@
 // export default HealthyFood;
 
 'use client'
+import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
 import { useAllNutritionQuery } from "@/redux/features/nutritionSlice";
 import Link from "next/link";
 import React from "react";
@@ -343,7 +344,7 @@ const HealthyFood: React.FC = () => {
   // Fetch data from API
   const { data, isLoading, error } = useAllNutritionQuery({});
 
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  // if (isLoading) return <p className="text-center mt-10">Loading.. .</p>;
   if (error)
     return (
       <p className="text-center mt-10 text-red-500">
@@ -354,6 +355,11 @@ const HealthyFood: React.FC = () => {
   const nutritionPlans: NutritionPlan[] = data?.data || [];
 
   return (
+
+    <>
+    {isLoading ? (
+      <CardAllSkeleton />
+    ) : (
     <div className="px-2 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
@@ -424,6 +430,8 @@ const HealthyFood: React.FC = () => {
         })}
       </div>
     </div>
+      )}
+      </>
   );
 };
 

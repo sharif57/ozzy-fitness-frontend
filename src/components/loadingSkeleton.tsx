@@ -8,18 +8,18 @@ const LoadingSkeleton = () => {
   return (
     <div>
       <div className="container mx-auto lg:p-6 p-2 mb-16">
-        <h1 className="lg:text-[48px] text-3xl font-semibold text-center my-10 text-[#000000]">
+        <div className="lg:text-[48px] text-3xl font-semibold text-center my-10 text-[#000000]">
           <Skeleton.Input active style={{ width: 250 }} />
-        </h1>
+        </div>
 
-        <h1 className="lg:text-[32px] text-2xl font-semibold mb-4">
+        <div className="lg:text-[32px] text-2xl font-semibold mb-4">
           <Skeleton.Input active style={{ width: 200 }} />
-        </h1>
+        </div>
 
         <div className="bg-white shadow-lg rounded-lg lg:p-6 mt-4">
-          <h2 className="text-lg font-semibold mb-4">
+          <div className="text-lg font-semibold mb-4">
             <Skeleton.Input active style={{ width: 300 }} />
-          </h2>
+          </div>
 
           <div className="mt-4 max-h-[650px] overflow-y-auto border border-gray-300 rounded-lg custom-scrollbar">
             <table className="w-full border-collapse">
