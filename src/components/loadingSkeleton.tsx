@@ -20,7 +20,7 @@ const LoadingSkeleton = () => {
           <div className="text-lg font-semibold mb-4">
             <Skeleton.Input active style={{ width: 300 }} />
           </div>
-
+    
           <div className="mt-4 max-h-[650px] overflow-y-auto border border-gray-300 rounded-lg custom-scrollbar">
             <table className="w-full border-collapse">
               <thead className="sticky top-0 bg-[#e6ebf1] z-10">
