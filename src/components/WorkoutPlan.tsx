@@ -5,6 +5,7 @@ import { useAllWorkPlanQuery } from "@/redux/features/workSlice";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import CardSkeleton from "./cardSkeleton";
 
 // Fetch environment variable for API base URL
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
@@ -77,10 +78,14 @@ const WorkoutPlan: React.FC = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
   return (
+
+    <>
+    {isLoading ? (
+        <CardSkeleton/>
+      ) : 
     <div className="px-2 md:px-12 lg:px-20 py-10 mx-auto max-w-[1580px]">
       <ToastContainer></ToastContainer>
       {/* Header */}
@@ -142,7 +147,8 @@ const WorkoutPlan: React.FC = () => {
         ))}
       </div>
     </div>
-  );
-};
+  }
+  </>
+  )}
 
 export default WorkoutPlan;

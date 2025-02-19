@@ -108,6 +108,7 @@
 
 
 "use client";
+import LoadingSkeleton from "@/components/loadingSkeleton";
 import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
 import { useWorkPlanDetailsQuery } from "@/redux/features/workSlice";
 import { useParams } from "next/navigation";
@@ -170,7 +171,7 @@ export default function Page() {
     }
   }, [params]);
 
-  if (isLoading) return <div>Loading...</div>; // Loading state
+
   if (error) return <div>Error fetching workout plan details.</div>; // Error handling
 
   const workoutPlan = workPlanDetails?.data?.workouts || [];
@@ -210,7 +211,12 @@ export default function Page() {
         };
 
   return (
+    <>
+    {isLoading ? (
+        <LoadingSkeleton/>
+      ) : 
     <div>
+  
       <div className="container mx-auto lg:p-6 p-2 mb-16">
         <h1 className="lg:text-[48px] text-3xl font-semibold text-center my-10 text-[#000000]">
           Plan Overview
@@ -225,7 +231,7 @@ export default function Page() {
         <div className="bg-white shadow-lg rounded-lg lg:p-6 mt-4">
           <h2 className="text-lg font-semibold">
             Focus:{" "}
-            {workPlanDetails?.data?.description || "Build strength and establish consistency."}
+            {workPlanDetails?.data?.title || "Build strength and establish consistency."}
           </h2>
 
           {/* Workout Plan Table */}
@@ -240,6 +246,8 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
+
+
                 {workoutPlan.map((day: WorkoutDay) => (
                   <tr key={day._id} className="border border-r border-gray-300">
                     <th className="px-4 py-3 font-semibold text-left text-[#545454] border-r">
@@ -283,6 +291,9 @@ export default function Page() {
           </button>
         </div>
       </div>
+     
     </div>
+}
+    </>
   );
 }

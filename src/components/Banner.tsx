@@ -1,3 +1,5 @@
+import Search from "./common/Search";
+
 const Banner = () => {
   return (
     <div>
@@ -19,22 +21,8 @@ const Banner = () => {
           <h1 className="text-white lg:text-[70px] text-[40px]  font-bold w-5/6 mx-auto">
             Create your workout Plan
           </h1>
-          <div className="flex items-center  w-5/6 mx-auto bg-white/10 backdrop-blur-lg rounded-lg px- ">
-            {/* Icon */}
-            <span className="text-white/70 text-lg pl-4">✨</span>
-
-            {/* Input Field */}
-            <input
-              type="text"
-              placeholder="Enter your prompt.."
-              className="bg-transparent w-full  text-white placeholder-white/60 outline-none px-2 py-6"
-            />
-
-            {/* Submit Button */}
-            <button className="bg-[#01336F] text-white lg:px-8 px-4 lg:py-6 py-6 rounded-r-lg">
-              Enter
-            </button>
-          </div>
+          
+<Search></Search>
         </div>
       </div>
     </div>
