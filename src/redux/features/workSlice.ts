@@ -44,7 +44,7 @@ export const workApi = baseApi.injectEndpoints({
 
     createWorkPlan: builder.mutation({
       query: (create) => ({
-        url: "workout-plan/create-workout-plan",
+        url: "/workout-plan/create-workout-plan",
         method: "POST",
         body: create,
         headers: {

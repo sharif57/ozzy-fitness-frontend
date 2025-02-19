@@ -46,7 +46,7 @@ console.log(workoutId,'workoutplan')
           console.log("Appointment booked successfully:", result);
     
           // ✅ Show success toast
-          toast.success("Appointment booked successfully!", {
+            toast.success(result?.message || 'Success', {
             position: "top-center",
             autoClose: 1000, // Toast disappears in 3 seconds
             hideProgressBar: false,
@@ -60,7 +60,7 @@ console.log(workoutId,'workoutplan')
           console.error("Failed to book appointment:", err);
     
           // ❌ Show error toast
-          toast.error("Failed to book appointment. Please try again.", {
+          toast.error("Failed to plan added . Please try again.", {
             position: "top-right",
             autoClose: 1000,
             hideProgressBar: false,
