@@ -108,6 +108,7 @@
 
 "use client";
 import LoadingSkeleton from "@/components/loadingSkeleton";
+import PlanOverview from "@/components/PlanOverview";
 import { useBookAppointmentMutation } from "@/redux/features/userworkplanSlice";
 import { useWorkPlanDetailsQuery } from "@/redux/features/workSlice";
 import { useParams } from "next/navigation";
@@ -217,20 +218,14 @@ export default function Page() {
       ) : (
         <div>
           <ToastContainer></ToastContainer>
-          <div className="container mx-auto lg:p-6 p-2 mb-16">
-            <h1 className="lg:text-[48px] text-3xl font-semibold text-center my-10 text-[#000000]">
-              Plan Overview
-            </h1>
-
-            {/* Header */}
-            <h1 className="lg:text-[32px] text-2xl font-semibold mb-4">
-              Workout Plan
-            </h1>
+          <PlanOverview></PlanOverview>
+          <div className="container mx-auto lg:p-6 p-2 mb-16 mt-5">
+          
 
             {/* Content */}
             <div className="bg-white shadow-lg rounded-lg lg:p-6 mt-4">
               <h2 className="text-lg font-semibold">
-                Focus:{" "}
+                <span className="text-[#01336F]">Focus:</span>{" "}
                 {workPlanDetails?.data?.title ||
                   "Build strength and establish consistency."}
               </h2>

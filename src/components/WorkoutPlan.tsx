@@ -51,7 +51,7 @@ const WorkoutPlan: React.FC = () => {
       console.log("Appointment booked successfully:", result);
 
       // ✅ Show success toast
-      toast.success("Appointment booked successfully!", {
+      toast.success(result?.message, {
         position: "top-center",
         autoClose: 1000, // Toast disappears in 3 seconds
         hideProgressBar: false,

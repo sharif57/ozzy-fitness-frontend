@@ -227,9 +227,7 @@ export default function Search() {
 
   const [createWorkPlan] = useCreateWorkPlanMutation();
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  
 
   const GPT_API = process.env.NEXT_PUBLIC_API_KEY_GPT_KEY;
 
@@ -260,6 +258,7 @@ export default function Search() {
               content: "You are a helpful AI fitness assistant.",
             },
             { role: "user", content: workoutPlanMessage },
+            
           ],
         }),
       });
@@ -268,7 +267,6 @@ export default function Search() {
       const gptResponseText = data?.choices?.[0]?.message?.content || "{}";
 
       const planData = extractJsonData(gptResponseText);
- 
 
       if (!planData) {
         throw new Error("Failed to parse GPT response into valid JSON.");
@@ -282,13 +280,11 @@ export default function Search() {
       // Save the generated plan to the database
       const result = await createWorkPlan(formData).unwrap();
       router.push(`/exercise/${result.data._id}`);
-      
-      
     } catch (err) {
       console.error("Error:", err);
-      toast.error("Failed to fetch response from GPT or save the plan.", {
+      toast.error("Fail to generate your plan. don't suggest more than 7 days", {
         position: "top-center",
-        autoClose: 1000, // Close the toast after 5 seconds
+        autoClose: 2000, // Close the toast after 5 seconds
       });
     } finally {
       setLoading(false);
@@ -307,6 +303,13 @@ export default function Search() {
     } catch (error) {
       console.error("Error parsing JSON:", error);
       return null;
+    }
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Prevents form submission if inside a form
+      handleSendMessage();
     }
   };
 
@@ -377,13 +380,13 @@ const WorkoutPlanSchema = new Schema<IWorkoutPlan>({
         <input
           type="text"
           value={inputMessage}
+          disabled={isLoading}
           onChange={(e) => setInputMessage(e.target.value)}
-        
+          onKeyDown={onKeyPress} 
           placeholder="Enter your prompt.. (Max 7 days)"
           className="bg-transparent w-full  text-white placeholder-white/50 outline-none px-2 py-6"
         />
 
-        
         <button
           onClick={handleSendMessage}
           className="bg-[#01336F] text-white lg:px-10 px-4 lg:py-6 py-6 rounded-r-lg flex items-center justify-center"
@@ -391,14 +394,13 @@ const WorkoutPlanSchema = new Schema<IWorkoutPlan>({
         >
           {loading ? (
             <div className="loader-inner">
-            <div className="loader-block"></div>
-            <div className="loader-block"></div>
-            <div className="loader-block"></div>
-            <div className="loader-block"></div>
-          </div>
+              <div className="loader-block"></div>
+              <div className="loader-block"></div>
+              <div className="loader-block"></div>
+              <div className="loader-block"></div>
+            </div>
           ) : (
             <h1 className="text-[18px] font-normal text-[#FFFFFF]">Enter</h1>
-
           )}
         </button>
       </div>

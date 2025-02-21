@@ -21,8 +21,8 @@ const Banner = () => {
           <h1 className="text-white lg:text-[70px] text-[40px]  font-bold w-5/6 mx-auto">
             Create your workout Plan
           </h1>
-          
-<Search></Search>
+
+          <Search></Search>
         </div>
       </div>
     </div>
