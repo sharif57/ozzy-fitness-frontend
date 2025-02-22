@@ -7,24 +7,24 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useUserProfileQuery } from "@/redux/features/userSlice";
-import { Dropdown } from "antd";
+import { Dropdown, MenuProps } from "antd";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { useMyWorkPlanAddQuery } from "@/redux/features/userworkplanSlice";
 
-interface UserProfile {
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  image?: string;
-}
+// interface UserProfile {
+//   name: string;
+//   email: string;
+//   phone: string;
+//   role: string;
+//   image?: string;
+// }
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { data: userData } = useUserProfileQuery<{ data: UserProfile }>();
+  const { data: userData } = useUserProfileQuery<any>();
   const userProfile = userData?.data;
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure .env.local has this variable
   const { data } = useMyWorkPlanAddQuery(undefined);
@@ -49,7 +49,14 @@ export default function Navbar() {
     { key: "3", label: <Link href="/myappointment">My Appointment</Link> },
     { key: "4", label: <Link href="/myworkoutplan">My Workout Plan</Link> },
     { type: "divider" },
-    { key: "5", label: <button className="text-[#BF0C0A]  font-normal " onClick={handleLogOut}>Logout</button> },
+    {
+      key: "5",
+      label: (
+        <button className="text-[#BF0C0A]  font-normal " onClick={handleLogOut}>
+          Logout
+        </button>
+      ),
+    },
   ];
 
   const menuItems = [
@@ -108,7 +115,7 @@ export default function Navbar() {
 
           {userProfile ? (
             <div className="flex items-center gap-4 ">
-              <Link href={'/myworkoutplan'}>
+              <Link href={"/myworkoutplan"}>
                 <div className="border border-gray-300 rounded-full ">
                   <div className="relative size-12 flex items-center justify-center rounded-full  ">
                     <Bell size={28} className="text-black " />
@@ -119,7 +126,11 @@ export default function Navbar() {
                   </div>
                 </div>
               </Link>
-              <Dropdown menu={{ items }} placement="bottomRight" arrow>
+              <Dropdown
+                menu={{ items } as MenuProps}
+                placement="bottomRight"
+                arrow
+              >
                 <div className="flex items-center gap-3 cursor-pointer">
                   <img
                     src={profileImage || "/images/user.png"}

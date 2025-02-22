@@ -43,12 +43,12 @@ const Footer = () => {
                   </li>
 
                   <li>
-                    <a
+                    <Link
                       className="text-white/75 transition hover:text-white/85"
                       href="/nutritionplan1"
                     >
                       Nutrition Plan
-                    </a>
+                    </Link>
                   </li>
 
                   <li>

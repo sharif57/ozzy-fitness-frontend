@@ -30,6 +30,8 @@ const WorkoutPlan: React.FC = () => {
   const [clientData, setClientData] = useState<WorkoutPlan[]>([]);
   const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
 
+
+
   // Ensure data is set only on the client to prevent hydration mismatch
   useEffect(() => {
     if (data?.data) {
@@ -38,14 +40,7 @@ const WorkoutPlan: React.FC = () => {
   }, [data]);
 
   const handleAddToPlan = async (workoutPlanId: string) => {
-    // try {
-    //   const result = await bookAppointment({ workoutPlanId }).unwrap();
-    //   console.log("Appointment booked successfully:", result);
-    //   // You can add a toast or notification here to inform the user
-    // } catch (err) {
-    //   console.error("Failed to book appointment:", err);
-    //   // Handle error (e.g., show an error message to the user)
-    // }
+ 
     try {
       const result = await bookAppointment({ workoutPlanId }).unwrap();
       console.log("Appointment booked successfully:", result);

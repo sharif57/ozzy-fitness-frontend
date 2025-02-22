@@ -13,12 +13,12 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-interface UserProfileData {
-  name: string;
-  email: string;
-  phone: string;
-  image: string;
-}
+// interface UserProfileData {
+//   name: string;
+//   email: string;
+//   phone: string;
+//   image: string;
+// }
 
 const EditMyProfile = () => {
   const navigate = useRouter();
@@ -28,7 +28,7 @@ const EditMyProfile = () => {
     data: user,
     isLoading,
     error,
-  } = useUserProfileQuery<{ data: UserProfileData }>();                        
+  } = useUserProfileQuery<any>();                        
 
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
   const [form] = Form.useForm();
@@ -37,7 +37,7 @@ const EditMyProfile = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
-    if (user?.data) {
+    if ((user )?.data) {
       form.setFieldsValue({
         name: user.data.name || "",
         email: user.data.email || "",

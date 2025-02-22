@@ -254,7 +254,7 @@ const WorkoutDayPage: React.FC = () => {
               <span className="text-gray-500">{section.duration}</span>
             </div>
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-10">
-              {section.exercises.map((exercise, idx) => (
+              {section.exercises.map((exercise:any, idx:number) => (
                 <div key={idx} className="rounded-lg overflow-hidden shadow-sm">
                   <div className="py-4 space-y-2 flex items-center justify-between">
                     <div>
