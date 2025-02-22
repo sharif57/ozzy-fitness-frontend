@@ -19,6 +19,19 @@ export const subscriptionApi = baseApi.injectEndpoints({
       invalidatesTags: ["Payment"], // Invalidates 'User' tag after mutation
     }),
 
+    subscriptionUpdate: builder.mutation({
+      query: (payment) => ({
+        url: "/subscription/update",
+        method: "PATCH",
+        body: payment,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          // "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["Payment"], // Invalidates 'User' tag after mutation
+    }),
+
 
     subscriptionGet: builder.query({
       query: () => ({
@@ -56,9 +69,11 @@ export const subscriptionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Payment"], // Invalidate cache after posting
     }),
+
+
     
 
   }),
 });
 
-export const {  useSubscriptionMutation , useSubscriptionGetQuery , useExersicePostMutation} = subscriptionApi;
+export const {  useSubscriptionMutation , useSubscriptionGetQuery , useExersicePostMutation , useSubscriptionUpdateMutation} = subscriptionApi;

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // 'use client'
 // import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
 // import { useAllNutritionQuery } from "@/redux/features/nutritionSlice";
@@ -139,7 +140,7 @@ const HealthyFood: React.FC = () => {
   const { data: userSubscription } = useSubscriptionGetQuery(undefined);
 
   // Extract subscription package name
-  const userPackage = userSubscription?.data?.package?.name || "";
+  // const userPackage = userSubscription?.data?.package?.name || "";
 
   // If API call fails, show error message
   if (error)

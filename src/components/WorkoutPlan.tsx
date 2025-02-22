@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import CardSkeleton from "./cardSkeleton";
 
 // Fetch environment variable for API base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
+
 
 interface Workout {
   _id: string;
@@ -29,6 +29,8 @@ const WorkoutPlan: React.FC = () => {
   const { data, isLoading, error } = useAllWorkPlanQuery(undefined);
   const [clientData, setClientData] = useState<WorkoutPlan[]>([]);
   const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
+console.log(API_BASE_URL,'============')
 
   // Ensure data is set only on the client to prevent hydration mismatch
   useEffect(() => {
@@ -38,14 +40,7 @@ const WorkoutPlan: React.FC = () => {
   }, [data]);
 
   const handleAddToPlan = async (workoutPlanId: string) => {
-    // try {
-    //   const result = await bookAppointment({ workoutPlanId }).unwrap();
-    //   console.log("Appointment booked successfully:", result);
-    //   // You can add a toast or notification here to inform the user
-    // } catch (err) {
-    //   console.error("Failed to book appointment:", err);
-    //   // Handle error (e.g., show an error message to the user)
-    // }
+   
     try {
       const result = await bookAppointment({ workoutPlanId }).unwrap();
       console.log("Appointment booked successfully:", result);
@@ -109,7 +104,7 @@ const WorkoutPlan: React.FC = () => {
             {/* Image */}
             <div className="relative">
               <img
-                src={`${API_BASE_URL}${plan.image}  || {plan.image} `}
+                src={`${API_BASE_URL}${plan.image} `}
                 alt={plan.planName}
                 className="w-full object-cover h-[290px] rounded-lg"
               />
@@ -125,7 +120,7 @@ const WorkoutPlan: React.FC = () => {
                     : "No Workouts"}
                 </h3>
               </div>
-              <p className="text-gray-500 text-sm">{plan.description}</p>
+              <p className="text-gray-500 text-sm">{plan.description.slice(0,160)}...</p>
             </div>
 
             {/* Buttons */}

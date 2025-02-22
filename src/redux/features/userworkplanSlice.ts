@@ -52,7 +52,7 @@ export const userWorkPlanApi = baseApi.injectEndpoints({
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
         }),
-        providesTags: ["Work"],
+        providesTags: ["AddPlan"],
       }),
       
   

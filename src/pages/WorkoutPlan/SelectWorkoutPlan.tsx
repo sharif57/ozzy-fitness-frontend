@@ -102,7 +102,6 @@ import { useAllWorkPlanQuery } from "@/redux/features/workSlice";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 
 interface Workout {
   _id: string;
@@ -123,6 +122,8 @@ const SelectWorkoutPlan: React.FC = () => {
   const { data, isLoading, error } = useAllWorkPlanQuery(undefined);
   const [clientData, setClientData] = useState<WorkoutPlan[]>([]);
   const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
+
 
   // Ensure data is set only on the client to prevent hydration mismatch
   useEffect(() => {
@@ -216,7 +217,9 @@ const SelectWorkoutPlan: React.FC = () => {
                     : "No Workouts"}
                 </h3>
               </div>
-              <p className="text-gray-500 text-sm">{plan.description}</p>
+              {/* <p className="text-gray-500 text-sm">{plan.description}</p> */}
+              <p className="text-gray-500 text-sm">{plan.description.slice(0,160)}...</p>
+
             </div>
 
             {/* Buttons */}
