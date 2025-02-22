@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* eslint-disable @next/next/no-img-element */
 // 'use client'
 // import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
@@ -116,8 +115,7 @@
 // };
 
 // export default HealthyFood;
-=======
->>>>>>> 380bc3da7dd81354811ffb67cb151ec9425c1c56
+
 
 "use client";
 import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
