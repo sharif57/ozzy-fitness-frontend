@@ -32,6 +32,8 @@ const WorkoutPlan: React.FC = () => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
 console.log(API_BASE_URL,'============')
 
+
+
   // Ensure data is set only on the client to prevent hydration mismatch
   useEffect(() => {
     if (data?.data) {
@@ -40,7 +42,11 @@ console.log(API_BASE_URL,'============')
   }, [data]);
 
   const handleAddToPlan = async (workoutPlanId: string) => {
+<<<<<<< HEAD
    
+=======
+ 
+>>>>>>> 380bc3da7dd81354811ffb67cb151ec9425c1c56
     try {
       const result = await bookAppointment({ workoutPlanId }).unwrap();
       console.log("Appointment booked successfully:", result);

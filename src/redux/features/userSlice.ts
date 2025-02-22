@@ -34,6 +34,7 @@ import baseApi from "../api/baseApi";
 
 interface ProfileData {
  data:{
+  _id:string;
   name: string;
   email: string;
   phone: string;

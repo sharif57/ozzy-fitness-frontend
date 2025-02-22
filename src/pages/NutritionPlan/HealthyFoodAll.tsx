@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable @next/next/no-img-element */
 // 'use client'
 // import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
@@ -115,6 +116,8 @@
 // };
 
 // export default HealthyFood;
+=======
+>>>>>>> 380bc3da7dd81354811ffb67cb151ec9425c1c56
 
 "use client";
 import CardAllSkeleton from "@/components/common/Skeleton/CardAllSkeleton";
@@ -122,6 +125,7 @@ import { useAllNutritionQuery } from "@/redux/features/nutritionSlice";
 import { useSubscriptionGetQuery } from "@/redux/features/subscriptionSlice";
 import Link from "next/link";
 import React from "react";
+
 
 // Define Type for Nutrition Plans
 type NutritionPlan = {
@@ -132,7 +136,7 @@ type NutritionPlan = {
   rating: number;
 };
 
-const HealthyFood: React.FC = () => {
+const HealthyFoodAll = () => {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure this is set in .env.local
 
   // Fetch data from API
@@ -248,4 +252,4 @@ const HealthyFood: React.FC = () => {
   );
 };
 
-export default HealthyFood;
+export default HealthyFoodAll;

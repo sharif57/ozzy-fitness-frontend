@@ -13,9 +13,7 @@ interface UserProfileData {
 }
 
 const UserProfile: React.FC = () => {
-  const { data, isLoading, error } = useUserProfileQuery<{
-    data: UserProfileData;
-  }>();
+  const { data, isLoading, error } = useUserProfileQuery<any>();
 
   const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
 

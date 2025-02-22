@@ -42,8 +42,8 @@ const TrainerProfile: React.FC = () => {
             <p className="text-[18px] font-normal text-[#545454] mt-4 leading-relaxed">
               While sports had always been present in my life since a young age,
               the desire for healing was equally important. As a small child, I
-              wanted to be a doctor, telling my sick grandmother "I'm going to
-              fix you." Sports and healing were a natural complement, and these
+              wanted to be a doctor, telling my sick grandmother &ldquo;I&#39;m going to
+              fix you.&ldquo; Sports and healing were a natural complement, and these
               two things were realized when I received a football scholarship
               from Oklahoma State University. This was an opportunity to compete
               in sports on a collegiate level, while earning a Bachelor of

@@ -132,6 +132,7 @@ const WorkoutDayPage: React.FC = () => {
           // setRating(5); // Reset rating if needed
         } catch (error) {
           // Handle error case
+          console.log(error)
           toast.error("An error occurred while submitting the review.");
         }
       }
