@@ -18,6 +18,7 @@ export default function Search() {
   const { data: userData } = useUserProfileQuery();
   const user = userData?.data;
 
+
   const { data: subscriptionData } = useSubscriptionGetQuery(undefined);
   const userSubscription = subscriptionData?.data;
 
@@ -33,28 +34,27 @@ export default function Search() {
 
   const [createWorkPlan] = useCreateWorkPlanMutation();
 
-  const GPT_API = process.env.NEXT_PUBLIC_API_KEY_GPT_KEY;
+
 
   // Function to fetch chat response
   const handleSendMessage = async () => {
-
-       if (!user || (!hasWorkoutSubscription && !hasBothSubscription)) {
+    if (!user || (!hasWorkoutSubscription && !hasBothSubscription)) {
       toast.error("You need a valid subscription to use this feature.");
       return;
     }
 
     setLoading(true);
 
-    const url = "https://api.openai.com/v1/chat/completions";
     const workoutPlanMessage = createWorkoutPlanMessage();
 
+
     try {
-      // Fetch GPT response
-      const response = await fetch(url, {
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_KEY}/api/v1/ai`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${GPT_API}`,
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}` 
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
@@ -68,8 +68,7 @@ export default function Search() {
         }),
       });
 
-      const data = await response.json();
-      const gptResponseText = data?.choices?.[0]?.message?.content || "{}";
+      const { data: gptResponseText } = await response.json();
 
       const planData = extractJsonData(gptResponseText);
 
@@ -114,12 +113,7 @@ export default function Search() {
     }
   };
 
-  const onKeyPress = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevents form submission if inside a form
-      handleSendMessage();
-    }
-  };
+
 
   // Function to create a workout plan message
   const createWorkoutPlanMessage = (): string => {
@@ -212,14 +206,16 @@ const WorkoutPlanSchema = new Schema<IWorkoutPlan>({
           className="bg-transparent w-full  text-white placeholder-white/50 outline-none px-2 py-6"
         />
 
-
         <button
           onClick={handleSendMessage}
-         
           className={`bg-[#01336F] text-white lg:px-10 px-4 lg:py-6 py-6 rounded-r-lg flex items-center justify-center ${
-            !hasWorkoutSubscription && !hasBothSubscription ? "opacity-50 cursor-not-allowed" : ""
+            !hasWorkoutSubscription && !hasBothSubscription
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
-          disabled={!hasWorkoutSubscription && !hasBothSubscription || loading}
+          disabled={
+            (!hasWorkoutSubscription && !hasBothSubscription) || loading
+          }
         >
           {loading ? (
             <div className="loader-inner">
@@ -236,97 +232,3 @@ const WorkoutPlanSchema = new Schema<IWorkoutPlan>({
     </div>
   );
 }
-
-/*
-"use client";
-import { useSubscriptionGetQuery } from "@/redux/features/subscriptionSlice";
-import { useUserProfileQuery } from "@/redux/features/userSlice";
-import {
-  useAllExerciseQuery,
-  useCreateWorkPlanMutation,
-} from "@/redux/features/workSlice";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-
-export default function Search() {
-  const router = useRouter();
-  const [inputMessage, setInputMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const { data: exerciseData, isLoading } = useAllExerciseQuery(undefined);
-  const { data: userData } = useUserProfileQuery();
-  const user = userData?.data;
-
-  const { data: subscriptionData } = useSubscriptionGetQuery(undefined);
-  const userSubscription = subscriptionData?.data;
-
-  // ✅ Subscription validation
-  const packageName = userSubscription?.package?.name?.toLowerCase();
-  const subscriptionStatus = userSubscription?.status === "active"; // Only active subscriptions allowed
-
-  const hasWorkoutSubscription = packageName === "workout" && subscriptionStatus;
-
-  const hasBothSubscription = packageName === "workout & nutrition" && subscriptionStatus;
-
-  const [createWorkPlan] = useCreateWorkPlanMutation();
-
-  const handleSendMessage = async () => {
-    if (!user || (!hasWorkoutSubscription && !hasBothSubscription)) {
-      toast.error("You need a valid subscription to use this feature.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const result = await createWorkPlan({ goal: inputMessage }).unwrap();
-      router.push(`/exercise/${result.data._id}`);
-    } catch (err) {
-      toast.error("Failed to generate workout plan.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div>
-      <div className="flex items-center w-5/6 mx-auto bg-white/10 backdrop-blur-lg rounded-lg px-">
-      <input
-  type="text"
-  value={inputMessage}
-  disabled={!hasWorkoutSubscription && !hasBothSubscription || isLoading}
-  onChange={(e) => setInputMessage(e.target.value)}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      if (!hasWorkoutSubscription && !hasBothSubscription) {
-        toast.warn("You need an active subscription to access this feature.");
-        router.push("/subscription1");
-      } else {
-        handleSendMessage();
-      }
-    }
-  }}
-  placeholder={
-    hasWorkoutSubscription || hasBothSubscription
-      ? "Enter maximum 7 days workout plan"
-      : "Subscription required"
-  }
-  className="bg-transparent w-full text-white placeholder-white/50 outline-none px-2 py-6"
-/>
-        <button
-          onClick={handleSendMessage}
-          className={`bg-[#01336F] text-white lg:px-10 px-4 lg:py-6 py-6 rounded-r-lg flex items-center justify-center ${
-            !hasWorkoutSubscription && !hasBothSubscription ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          disabled={!hasWorkoutSubscription && !hasBothSubscription || loading}
-        >
-          {loading ? "Loading..." : "Enter"}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-
-*/

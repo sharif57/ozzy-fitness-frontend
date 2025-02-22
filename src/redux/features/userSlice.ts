@@ -39,6 +39,10 @@ interface ProfileData {
   phone: string;
   role: string;
   image: string;
+  age:number;
+  gender:number;
+  height:number;
+  weight:number;
   payment: boolean;
   subscription: boolean;
   isDeleted: boolean;

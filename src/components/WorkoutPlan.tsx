@@ -109,7 +109,7 @@ const WorkoutPlan: React.FC = () => {
             {/* Image */}
             <div className="relative">
               <img
-                src={`${API_BASE_URL}${plan.image}`}
+                src={`${API_BASE_URL}${plan.image}  || {plan.image} `}
                 alt={plan.planName}
                 className="w-full object-cover h-[290px] rounded-lg"
               />

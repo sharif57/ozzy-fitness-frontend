@@ -299,40 +299,40 @@ import { useAllExerciseQuery, useCreateWorkPlanMutation } from "@/redux/features
 import React, { useState } from "react";
 
 // Define TypeScript types for better structure
-interface Message {
-  sender: string;
-  text: string;
-}
+// interface Message {
+//   sender: string;
+//   text: string;
+// }
 
-interface Exercise {
-  _id: string;
-  name: string;
-}
+// interface Exercise {
+//   _id: string;
+//   name: string;
+// }
 
-interface UserProfile {
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  image: string;
-  injury: string;
-  payment: boolean;
-  subscription: boolean;
-  isDeleted: boolean;
-  verified: boolean;
-}
+// interface UserProfile {
+//   name: string;
+//   email: string;
+//   phone: string;
+//   role: string;
+//   image: string;
+//   injury: string;
+//   payment: boolean;
+//   subscription: boolean;
+//   isDeleted: boolean;
+//   verified: boolean;
+// }
 
-interface WorkoutSection {
-  exercises: Exercise[];
-}
+// interface WorkoutSection {
+//   exercises: Exercise[];
+// }
 
-interface WorkoutDay {
-  _id: string;
-  day: number;
-  warmUp: WorkoutSection;
-  mainWorkout: WorkoutSection;
-  coolDown: WorkoutSection;
-}
+// interface WorkoutDay {
+//   _id: string;
+//   day: number;
+//   warmUp: WorkoutSection;
+//   mainWorkout: WorkoutSection;
+//   coolDown: WorkoutSection;
+// }
 
 const ChatInterface: React.FC = () => {
   const [inputMessage, setInputMessage] = useState("");

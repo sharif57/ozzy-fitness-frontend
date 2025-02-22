@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 
 "use client";
@@ -14,6 +15,7 @@ import NutritionPlanDetails from "@/pages/NutritionPlan/NutritionPlanDetails";
 import Link from "next/link";
 import Loading from "@/components/Loading";
 import { useUserProfileQuery } from "@/redux/features/userSlice";
+
 const onChange: CheckboxProps["onChange"] = (e) => {
   console.log(`checked = ${e.target.checked}`);
 };
@@ -22,16 +24,13 @@ const MealPlans: React.FC = () => {
   const params = useParams();
   const id = params?.id as string; // Get nutrition plan ID from URL
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY; // Ensure this is set in .env.local
-  const GPT_KEY = process.env.NEXT_PUBLIC_API_KEY_GPT_KEY;
-  console.log(GPT_KEY);
+
+
 
   const { data, isLoading, error } = useNutritionDetailsQuery(id);
   const nutrition = data?.data?.nutrition;
 
   const {data:userData} = useUserProfileQuery()
-  console.log(
-    " here data",userData?.data)
-  
 
   const [openModal, setOpenModal] = useState(false);
   const [messages, setMessages] = useState([
@@ -46,49 +45,44 @@ const MealPlans: React.FC = () => {
     console.log("Nutrition Data:", nutrition);
   }, [nutrition]);
 
-  const fetchGPTResponse = async (message) => {
+  const fetchGPTResponse = async (message:string) => {
     try {
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${GPT_KEY}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [
-              {
-                role: "system",
-                content: `You are a nutritionist. Answer queries related to ${nutrition?.title} ${userData?.data?.age} ${userData?.data?.gender}  ${userData?.data?.height} ${userData?.data?.weight}.`,
-              },
-              { role: "user", content: message },
-            ],
-          }),
-        }
-      );
 
-      console.log(response)
+      
+      const response = await fetch(`${API_BASE_URL}/api/v1/ai`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}` 
+        },
+        body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [
+                  {
+                    role: "system",
+                    content: `You are a nutritionist. Answer queries related to ${nutrition?.title} ${userData?.data?.age} ${userData?.data?.gender}  ${userData?.data?.height} ${userData?.data?.weight}.`,
+                  },
+                  { role: "user", content: message },
+                ],
+              }),
+      });
 
       if (!response.ok) {
         throw new Error(`API Error: ${response.status} ${response.statusText}`);
       }
 
-      const data = await response.json();
-      if (!data.choices || data.choices.length === 0) {
-        throw new Error("Invalid GPT response format.");
-      }
-      console.log(data)
+      const {data} = await response.json();
+      
+    
 
-      return data.choices[0].message.content;
+      return data
     } catch (error) {
       console.error("Error fetching GPT response:", error);
       return "Sorry, I couldn't process your request at the moment.";
     }
   };
 
-  console.log("GPT API Key:", GPT_KEY);
+ 
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
@@ -104,7 +98,7 @@ const MealPlans: React.FC = () => {
     ]);
   };
 
-  const onKeyPress = (e) => {
+  const onKeyPress = (e:any) => {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevents form submission if inside a form
       handleSendMessage();
@@ -250,7 +244,7 @@ const MealPlans: React.FC = () => {
             <div className="mt-6">
               <h2 className="text-[32px] font-medium mb-3">Ingredients</h2>
               <ul className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                {nutrition?.ingredients.map((ingredient, index) => (
+                {nutrition?.ingredients.map((ingredient:any, index:number) => (
                   <li key={index}>
                     <Checkbox onChange={onChange}>
                       <p className="text-[18px] font-normal text-[#333333]">
@@ -274,7 +268,7 @@ const MealPlans: React.FC = () => {
                 Related Recipes
               </h1>
               {/* <div className=""> */}
-              {data?.data?.relatedNutritions?.map((plan) => (
+              {data?.data?.relatedNutritions?.map((plan:any) => (
                 <Link key={plan.id} href={`/nutritionplan1/${plan._id}`}>
                   <div className="lg:flex gap-3 items-center border  my-5  p-3 rounded-lg shadow-sm">
                     <img
