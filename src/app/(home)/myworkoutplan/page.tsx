@@ -39,6 +39,7 @@ const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_API_KEY || "";
 
 export default function WorkPlan() {
   const { data } = useMyWorkPlanAddQuery(undefined);
+  console.log(data?.data)
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
