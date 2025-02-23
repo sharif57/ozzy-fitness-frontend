@@ -1,3 +1,4 @@
+"use client"
 import Appointment from "@/components/Appointment";
 import Banner from "@/components/Banner";
 import HealthyFood from "@/components/HealthyFood";

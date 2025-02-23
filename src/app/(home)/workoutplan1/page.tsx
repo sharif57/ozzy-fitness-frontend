@@ -1,3 +1,5 @@
+"use client"
+
 import Appointment from '@/components/Appointment'
 import SelectWorkoutPlan from '@/pages/WorkoutPlan/SelectWorkoutPlan'
 import WorkoutBanner from '@/pages/WorkoutPlan/WorkoutBanner'

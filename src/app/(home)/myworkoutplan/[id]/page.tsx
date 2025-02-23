@@ -93,6 +93,15 @@ const WorkoutDayPage: React.FC = () => {
     }
   };
 
+  // const handleNextDay = () => {
+  //   if (currentDay < totalDays) {
+  //     router.push(`/myworkoutplan/${workoutPlanId}?day=${currentDay + 1}`);
+  //     setTimeout(() => {
+  //       window.location.reload();
+  //     }); // Small delay ensures smooth navigation before reload
+  //   }
+  // };
+  
 
 
     // Open modal when clicking MessageSquareShare

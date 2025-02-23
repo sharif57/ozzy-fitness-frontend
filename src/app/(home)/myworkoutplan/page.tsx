@@ -38,7 +38,7 @@ interface WorkoutPlan {
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_API_KEY || "";
 
 export default function WorkPlan() {
-  const { data } = useMyWorkPlanAddQuery(undefined);
+  const { data , isLoading} = useMyWorkPlanAddQuery(undefined);
   console.log(data?.data)
   const [hydrated, setHydrated] = useState(false);
 
@@ -48,8 +48,9 @@ export default function WorkPlan() {
 
   if (!hydrated) return null;
 
+  if (isLoading) return <div>Loading...</div>;
+
   const workPlans: WorkoutPlan[] = data?.data || [];
-  console.log(workPlans)
 
   return (
     <div className="lg:p-6 p-3 container mx-auto h-auto">
@@ -66,7 +67,7 @@ export default function WorkPlan() {
 
             return (
               <Link href={`/myworkoutplan/${workPlan._id}`} key={workPlan._id}>
-                <div className="bg-white shadow-md rounded-lg p-4 transition hover:shadow-xl relative flex flex-col h-[400px]">
+                <div className="bg-white shadow-md rounded-lg p-4 transition hover:shadow-xl relative flex flex-col ">
                   {hydrated && (
                     <img
                       src={imageUrl}
@@ -78,11 +79,11 @@ export default function WorkPlan() {
                     <div>
                       <div className="flex justify-between items-center">
                         <h3 className="lg:text-[20px] text-[18px] font-medium">
-                          {planName}
+                          {planName.slice(0, 18)}
                         </h3>
                         <span className="text-gray-500 text-sm">Time: {totalDays} day</span>
                       </div>
-                      <p className="text-gray-600 text-sm mt-1 line-clamp-3">{description}</p>
+                      <p className="text-gray-600 text-sm mt-1 line-clamp-3">{description.slice(0,80)}.....</p>
                     </div>
                     <div className="mt-4">
                       <div className="flex justify-between items-center">

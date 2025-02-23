@@ -15,12 +15,12 @@ export const nutritionApi = baseApi.injectEndpoints({
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       }),
-      providesTags: ["Room"],
+      providesTags: ["NutritionPlan"],
     }),
 
     nutritionDetails: builder.query({
         query: (_id) => ({
-          url: `/nutrition//nutriton-details/${_id}`,
+          url: `/nutrition/nutriton-details/${_id}`,
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
