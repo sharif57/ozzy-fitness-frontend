@@ -143,6 +143,7 @@ import {
   useSubscriptionUpdateMutation,
 } from "@/redux/features/subscriptionSlice";
 import MembershipSkeleton from "./common/Skeleton/MembershipSkeleton";
+import { toast } from "react-toastify";
 
 // Define Type for Membership Plans from the API
 interface PackageData {
@@ -190,9 +191,11 @@ const Membership: React.FC = () => {
     try {
       const response = await subscriptionUpdate({ newPackageId }).unwrap();
       if (response.success) {
-        window.location.reload(); // Reload the page to reflect changes
-        alert("Subscription updated successfully!");
-        // Optionally, you can refetch the user subscription data here
+        toast.success("Subscription updated successfully!")
+      
+       setTimeout(() => {
+         window.location.reload()}, 1000)
+        
       } else {
         alert("Failed to update subscription.");
       }

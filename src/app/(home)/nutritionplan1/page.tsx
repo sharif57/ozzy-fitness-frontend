@@ -119,9 +119,9 @@ export default function NutritionPlan() {
                       {/* Buttons */}
                       <div className="pt-4 flex justify-between gap-4">
                         {userSubscription?.data?.package?.name ===
-                          "nutration" ||
+                          "nutrition" ||
                         userSubscription?.data?.package?.name ===
-                          "workout & nutration" ? (
+                          "workout & nutrition" ? (
                           <Link
                             href={`/nutritionplan1/${plan._id}`}
                             className="w-full py-3 text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition text-center flex items-center justify-center"

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import Appointment from "@/components/Appointment";
+import CardSkeleton from "@/components/cardSkeleton";
 import DayBanner from "@/pages/dayRole/DayBanner";
 import { useReviewMutation } from "@/redux/features/reviewSlice";
 import { useUserWorkPlanDetailsQuery } from "@/redux/features/userworkplanSlice";
@@ -53,7 +54,7 @@ const WorkoutDayPage: React.FC = () => {
   }
 
   if (isLoading) {
-    return <p className="text-center text-gray-600 mt-10">Loading...</p>;
+    return <CardSkeleton />;
   }
 
   if (error) {
@@ -87,20 +88,20 @@ const WorkoutDayPage: React.FC = () => {
     }
   };
 
-  const handleNextDay = () => {
-    if (currentDay < totalDays) {
-      router.push(`/myworkoutplan/${workoutPlanId}?day=${currentDay + 1}`);
-    }
-  };
-
   // const handleNextDay = () => {
   //   if (currentDay < totalDays) {
   //     router.push(`/myworkoutplan/${workoutPlanId}?day=${currentDay + 1}`);
-  //     setTimeout(() => {
-  //       window.location.reload();
-  //     }); // Small delay ensures smooth navigation before reload
   //   }
   // };
+
+  const handleNextDay = () => {
+    if (currentDay < totalDays) {
+      router.push(`/myworkoutplan/${workoutPlanId}?day=${currentDay + 1}`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // Small delay ensures smooth navigation before reload
+    }
+  };
   
 
 

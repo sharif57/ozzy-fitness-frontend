@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import CardSkeleton from "./cardSkeleton";
+import { useSubscriptionGetQuery } from "@/redux/features/subscriptionSlice";
 
 // Fetch environment variable for API base URL
 
@@ -30,7 +31,7 @@ const WorkoutPlan: React.FC = () => {
   const [clientData, setClientData] = useState<WorkoutPlan[]>([]);
   const [bookAppointment] = useBookAppointmentMutation(); // Use the mutation hook
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_KEY;
-console.log(API_BASE_URL,'============')
+    const { data: userSubscription } = useSubscriptionGetQuery(undefined);
 
 
 
@@ -127,18 +128,42 @@ console.log(API_BASE_URL,'============')
 
             {/* Buttons */}
             <div className="p-4 flex justify-between gap-4">
-              <Link
-                href={`/workoutplan1/${plan._id}`}
-                className="w-1/2 py-2 lg:text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
-              >
-                <button>See Details</button>
-              </Link>
-              <button
+             
+              {
+                userSubscription?.data?.package?.name === "workout" ||
+                userSubscription?.data?.package?.name ===
+                  "workout & nutrition" ? <Link
+                  href={`/workoutplan1/${plan._id}`}
+                  className="w-1/2 py-2 lg:text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
+                >
+                  <button>See Details</button>
+                </Link>:
+                 <Link
+                 href={`/workoutplan1/${plan._id}`}
+                 className="w-1/2 py-2 lg:text-[18px] text-center font-normal border border-black rounded-lg text-gray-700 hover:bg-gray-100 transition"
+               >
+                 <button disabled>See Details</button>
+               </Link>
+              }
+              {
+                userSubscription?.data?.package?.name === "workout" ||
+                userSubscription?.data?.package?.name ===
+                  "workout & nutrition" ? <button
+                  onClick={() => handleAddToPlan(plan._id)}
+                  className="w-1/2 py-2 lg:text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
+                >
+                  Add to Plan
+                </button>:
+                <button
                 onClick={() => handleAddToPlan(plan._id)}
-                className="w-1/2 py-2 lg:text-[18px] font-normal bg-[#01336F] text-white rounded-lg transition"
+                disabled
+                className="w-1/2 py-2 lg:text-[18px] font-normal bg-gray-400 text-white rounded-lg transition"
               >
                 Add to Plan
               </button>
+              }
+             
+              
             </div>
           </div>
         ))}
