@@ -54,6 +54,7 @@ export const workApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Work"]
     }),
+    
 
   }),
 });

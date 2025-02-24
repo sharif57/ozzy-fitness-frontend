@@ -48,6 +48,7 @@ export default function Navbar() {
     { key: "2", label: <Link href="/profile">Profile</Link> },
     { key: "3", label: <Link href="/myappointment">My Appointment</Link> },
     { key: "4", label: <Link href="/myworkoutplan">My Workout Plan</Link> },
+    { key: "4", label: <Link href="/mymealplan">My Meal Plan</Link> },
     { type: "divider" },
     {
       key: "5",

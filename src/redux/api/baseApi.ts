@@ -33,6 +33,7 @@ const baseApi = createApi({
     "WorkoutPlan",
     "NutritionPlan",
     "Work",
+    'MealPlan',
     'Review',
     'Appointment',
     "Payment",
