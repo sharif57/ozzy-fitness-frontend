@@ -35,7 +35,8 @@ const baseApi = createApi({
     "Work",
     'Review',
     'Appointment',
-    "Payment"
+    "Payment",
+    "Setting",
   ], // Declare global tag types
   endpoints: () => ({}), // Empty object, later extended using injectEndpoints
 });
