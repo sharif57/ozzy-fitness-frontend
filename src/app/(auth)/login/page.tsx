@@ -10,6 +10,7 @@ import { useLoginMutation } from "@/redux/features/authSlice"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useRouter } from "next/navigation"
+import { saveTokens } from "@/service/authService"
 
 interface UserCredentials {
   email: string
@@ -27,51 +28,6 @@ export default function Login() {
     password: "",
   })
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-
-  //   try {
-  //     const response = await login({
-  //       email: formData.email,
-  //       password: formData.password,
-  //     }).unwrap()
-
-  //     console.log(response)
-
-  //     if (response.success) {
-  //       localStorage.setItem("accessToken", response.data.accessToken)
-  //       Cookies.set("accessToken", response.data.accessToken, {
-  //         expires: 1,
-  //         path: "/",
-  //         sameSite: "Strict",
-  //         secure: true,
-  //       })
-  //       localStorage.setItem("refreshToken", response.data.refreshToken)
-  //       localStorage.setItem("user", JSON.stringify(response.data.user))
-
-      
-
-  //       toast.success("Login Successful!", {
-  //         autoClose: 1500,
-  //       })
-
-  //       setTimeout(() => {
-  //         router.push("/details")
-  //       })
-  //     } else {
-  //       toast.error(response.message || "Invalid credentials!")
-  //     }
-  //   } catch (error: unknown) {
-  //     console.error("Login error:", error)
-  //     if (error && typeof error === 'object' && 'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data) {
-  //       toast.error((error.data as { message: string }).message || "Something went wrong. Try again!")
-  //     } else {
-  //       toast.error("Something went wrong. Try again!")
-  //     }
-  //   }
-  // }
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -86,13 +42,14 @@ export default function Login() {
   
       if (response.success) {
         // Save tokens and user data to localStorage and cookies
+        await saveTokens(response.data.accessToken)
         localStorage.setItem("accessToken", response.data.accessToken)
-        Cookies.set("accessToken", response.data.accessToken, {
-          expires: 1,
-          path: "/",
-          sameSite: "Strict",
-          secure: true,
-        })
+        // Cookies.set("accessToken", response.data.accessToken, {
+        //   expires: 1,
+        //   path: "/",
+        //   sameSite: "Strict",
+        //   secure: true,
+        // })
         localStorage.setItem("refreshToken", response.data.refreshToken)
         localStorage.setItem("user", JSON.stringify(response.data.user))
   
