@@ -12,6 +12,8 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     const token = request.cookies.get("accessToken")?.value;
 
     // console.log(token, "accessToken");
+
+    console.log("token",token)
     
     if (!token) {
       if (AuthRoutes.includes(pathname)) {

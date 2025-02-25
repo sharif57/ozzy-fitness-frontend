@@ -22,7 +22,7 @@ export default function MealPlanCreate() {
   const subscriptionStatus = userSubscription?.status === "active";
 
   const hasWorkoutSubscription =
-    packageName === "workout" && subscriptionStatus;
+    packageName === "nutrition" && subscriptionStatus;
 
   const hasBothSubscription =
     packageName === "workout & nutrition" && subscriptionStatus;
