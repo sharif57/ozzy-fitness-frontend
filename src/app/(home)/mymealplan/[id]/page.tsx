@@ -8,7 +8,6 @@ export default function MealPlanDetails() {
   const id = params?.id as string;
   const { data } = useMealPlanDetailsQuery(id);
 
-  // Extract meal plan data safely
   const planData = data?.data?.plans || [];
 
   return (
