@@ -8,8 +8,23 @@ export default function MealPlanDetails() {
   const id = params?.id as string;
   const { data } = useMealPlanDetailsQuery(id);
 
-  const planData = data?.data?.plans || [];
-
+  interface MealPlanItem {
+    _id: string;
+    day: string;
+    breakfast: string;
+    midMorningSnack: string;
+    lunch: string;
+    afternoonSnack: string;
+    dinner: string;
+    calories: number;
+    carb: number;
+    protein: number;
+    fiber: number;
+    fat: number;
+  }
+  
+  const planData: MealPlanItem[] = data?.data?.plans || [];
+  
   return (
     <div>
       <div className="container mx-auto p-6">
